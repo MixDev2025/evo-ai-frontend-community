@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://evolutionfoundation.com.br">
-    <img src="./public/hover-evolution.png" alt="Evolution Foundation" />
+    <img src="./public/hover-evolution.png" alt="Mix Marketing Tecnologia" />
   </a>
 </p>
 
@@ -13,13 +13,13 @@
 <p align="center">
   <a href="https://github.com/evolution-foundation/evo-ai-frontend-community/releases/latest"><img src="https://img.shields.io/github/v/release/evolution-foundation/evo-ai-frontend-community?include_prereleases&label=version&color=00ffa7" alt="Latest version" /></a>
   <a href="https://opensource.org/licenses/Apache-2.0"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" alt="License: Apache 2.0" /></a>
-  <a href="https://docs.evolutionfoundation.com.br"><img src="https://img.shields.io/badge/Docs-evolutionfoundation.com.br-00ffa7" alt="Documentation" /></a>
+  <a href="https://docs-chatmix.velto.com.br"><img src="https://img.shields.io/badge/Docs-evolutionfoundation.com.br-00ffa7" alt="Documentation" /></a>
   <a href="https://evolutionfoundation.com.br/community"><img src="https://img.shields.io/badge/Community-Join%20us-white" alt="Community" /></a>
 </p>
 
 <p align="center">
   <a href="https://evolutionfoundation.com.br">Website</a> &middot;
-  <a href="https://docs.evolutionfoundation.com.br">Documentation</a> &middot;
+  <a href="https://docs-chatmix.velto.com.br">Documentation</a> &middot;
   <a href="https://evolutionfoundation.com.br/community">Community</a> &middot;
   <a href="mailto:suporte@evofoundation.com.br">Support</a>
 </p>
@@ -34,7 +34,7 @@ Built with React 19, TypeScript, Vite, TailwindCSS 4 and an in-house design syst
 
 ## Part of the Evo CRM Community
 
-Evo CRM Frontend is part of the [Evo CRM Community](https://github.com/evolution-foundation/evo-crm-community) ecosystem maintained by Evolution Foundation. To use the full stack, clone the umbrella repository with submodules:
+Evo CRM Frontend is part of the [Evo CRM Community](https://github.com/evolution-foundation/evo-crm-community) ecosystem maintained by Mix Marketing Tecnologia. To use the full stack, clone the umbrella repository with submodules:
 
 ```bash
 git clone --recurse-submodules git@github.com:evolution-foundation/evo-crm-community.git
@@ -179,7 +179,7 @@ For full code conventions, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 | Resource | Link |
 |---|---|
 | Website | [evolutionfoundation.com.br](https://evolutionfoundation.com.br) |
-| Documentation | [docs.evolutionfoundation.com.br](https://docs.evolutionfoundation.com.br) |
+| Documentation | [docs-chatmix.velto.com.br](https://docs-chatmix.velto.com.br) |
 | Community | [evolutionfoundation.com.br/community](https://evolutionfoundation.com.br/community) |
 | Changelog | [CHANGELOG.md](./CHANGELOG.md) |
 | Contributing | [CONTRIBUTING.md](./CONTRIBUTING.md) |
@@ -207,12 +207,12 @@ Evo CRM Frontend is licensed under the Apache License 2.0, with additional brand
 
 ## Trademarks
 
-"Evolution Foundation", "Evolution" and "Evo CRM Frontend" are trademarks of Evolution Foundation. See [TRADEMARKS.md](./TRADEMARKS.md) for the brand assets policy.
+"Mix Marketing Tecnologia", "Evolution" and "Evo CRM Frontend" are trademarks of Mix Marketing Tecnologia. See [TRADEMARKS.md](./TRADEMARKS.md) for the brand assets policy.
 
 Third-party attributions are documented in [NOTICE](./NOTICE).
 
 ---
 
 <p align="center">
-  Made by <a href="https://evolutionfoundation.com.br">Evolution Foundation</a> · © 2026
+  Made by <a href="https://evolutionfoundation.com.br">Mix Marketing Tecnologia</a> · © 2026
 </p>

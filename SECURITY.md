@@ -1,6 +1,6 @@
 # Security Policy
 
-Evolution Foundation takes the security of Evo CRM Frontend seriously. We
+Mix Marketing Tecnologia takes the security of Evo CRM Frontend seriously. We
 appreciate your efforts to responsibly disclose any vulnerabilities you find.
 
 ## Reporting a Vulnerability
@@ -60,7 +60,7 @@ vulnerabilities will be:
 
 - Credited in the security advisory (with permission)
 - Listed in our acknowledgments page (when available)
-- Eligible for public recognition via Evolution Foundation channels
+- Eligible for public recognition via Mix Marketing Tecnologia channels
 
 ---
 

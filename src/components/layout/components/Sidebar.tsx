@@ -222,7 +222,7 @@ export default function Sidebar({
                 )}
                 <div className="mt-2 flex flex-col gap-1 text-xs">
                   <a
-                    href="https://docs.evolutionfoundation.com.br/"
+                    href="https://docs-chatmix.velto.com.br/"
                     target="_blank"
                     rel="noreferrer"
                     className="text-muted-foreground hover:text-foreground transition-colors"

@@ -41,7 +41,7 @@ function generateSecret(byteLength = 32): string {
 
 // EVOLUTION_HUB_URL é hardcoded no backend (lib/meta_base_url.rb) —
 // não é mais editável pelo admin porque o Hub é um serviço único da
-// Evolution Foundation, não muda por instalação.
+// Mix Marketing Tecnologia, não muda por instalação.
 const schema = z.object({
   EVOLUTION_HUB_ENABLED: z.union([z.string(), z.boolean()]).optional(),
   EVOLUTION_HUB_API_KEY: z.string().optional().nullable(),

@@ -2,9 +2,9 @@
 
 Version 1.0, 2026.05.06
 
-"Evolution Foundation", "Evolution" and "Evo CRM Frontend" are trademarks of
-Evolution Foundation. The "evocrm-frontend" wordmark and the Evo CRM Frontend
-logo are trademarks of Evolution Foundation.
+"Mix Marketing Tecnologia", "Evolution" and "Evo CRM Frontend" are trademarks of
+Mix Marketing Tecnologia. The "evocrm-frontend" wordmark and the Evo CRM Frontend
+logo are trademarks of Mix Marketing Tecnologia.
 
 ## 1. Scope and purpose
 
@@ -13,10 +13,10 @@ It is intended to protect users from confusion and to preserve the official
 Evo CRM Frontend visual identity.
 
 This policy applies to any use of:
-(a) the product names and marks "Evolution Foundation", "Evolution" and "Evo CRM Frontend";
+(a) the product names and marks "Mix Marketing Tecnologia", "Evolution" and "Evo CRM Frontend";
 (b) the official logo and wordmark: the "evocrm-frontend" wordmark and any
     associated icon in neon green;
-(c) the copyright line "© 2026 Evolution Foundation"; and
+(c) the copyright line "© 2026 Mix Marketing Tecnologia"; and
 (d) any materials that implement or express the Evo CRM Frontend official look
     and feel, including the Protected Visual Identity Elements listed in Section 3.
 
@@ -28,7 +28,7 @@ brand assets.
 
 2.1. You may truthfully refer to Evo CRM Frontend to describe that your software
 is based on, compatible with, or derived from this project, provided that such
-use does not imply endorsement by Evolution Foundation.
+use does not imply endorsement by Mix Marketing Tecnologia.
 
 2.2. You may distribute and publicly host unmodified official builds of
 Evo CRM Frontend that include Evo CRM Frontend brand assets, provided that you
@@ -42,9 +42,9 @@ create confusion.
 ## 3. Protected Visual Identity Elements (Brand Assets)
 
 The following are the "Protected Visual Identity Elements":
-(a) Product names and marks: "Evolution Foundation", "Evolution" and "Evo CRM Frontend";
+(a) Product names and marks: "Mix Marketing Tecnologia", "Evolution" and "Evo CRM Frontend";
 (b) Official logo and wordmark: the "evocrm-frontend" wordmark and any associated icon;
-(c) Copyright line: "© 2026 Evolution Foundation";
+(c) Copyright line: "© 2026 Mix Marketing Tecnologia";
 (d) Official palette:
     Background main: #0a0a0a
     Background cards and popovers: #0a0a0a
@@ -76,7 +76,7 @@ If you distribute or publicly host a modified user interface or user experience
 
 4.3. **No endorsement.**
 You may not use Evo CRM Frontend trademarks or brand assets in a way that
-implies Evolution Foundation sponsors, endorses, or is affiliated with your
+implies Mix Marketing Tecnologia sponsors, endorses, or is affiliated with your
 distribution, except for unmodified official builds.
 
 4.4. **No derivative works of the logo and wordmark.**
@@ -86,7 +86,7 @@ Evo CRM Frontend logo or wordmark.
 ## 5. Permission requests
 
 Any use not expressly permitted by this policy requires prior written permission
-from Evolution Foundation. Contact: **suporte@evofoundation.com.br**.
+from Mix Marketing Tecnologia. Contact: **suporte@evofoundation.com.br**.
 
 ## 6. Enforcement and termination
 

@@ -78,11 +78,11 @@ governed separately by [TRADEMARKS.md](./TRADEMARKS.md).
 ## Questions?
 
 - **Community**: [evolutionfoundation.com.br/community](https://evolutionfoundation.com.br/community)
-- **Documentation**: [docs.evolutionfoundation.com.br](https://docs.evolutionfoundation.com.br)
+- **Documentation**: [docs-chatmix.velto.com.br](https://docs-chatmix.velto.com.br)
 - **Email**: suporte@evofoundation.com.br
 
 Thanks for helping make Evo CRM Frontend better!
 
 ---
 
-© 2026 Evolution Foundation
+© 2026 Mix Marketing Tecnologia

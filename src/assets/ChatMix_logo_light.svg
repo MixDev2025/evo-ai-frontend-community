@@ -1,0 +1,14 @@
+<svg width="300" height="90" viewBox="0 0 300 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mixGradientLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFA7" />
+      <stop offset="100%" stop-color="#00B8FF" />
+    </linearGradient>
+  </defs>
+  <!-- Logo Icon -->
+  <circle cx="45" cy="45" r="25" fill="url(#mixGradientLight)" opacity="0.9"/>
+  <circle cx="65" cy="45" r="25" fill="#4A00E0" opacity="0.9"/>
+  
+  <!-- Logo Text -->
+  <text x="110" y="58" font-family="'Inter', -apple-system, sans-serif" font-weight="800" font-size="40" fill="#0A0A0A">Chat<tspan fill="url(#mixGradientLight)">Mix</tspan></text>
+</svg>

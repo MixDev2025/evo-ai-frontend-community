@@ -649,7 +649,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           )}
 
           {/* Primeira linha: Reply Mode Toggle + Botões de ação rápida */}
-          <div className="flex items-center justify-between mb-3 gap-3">
+          <div className="flex flex-wrap items-center justify-between mb-2 sm:mb-3 gap-2 sm:gap-3">
             {/* Reply Mode Toggle */}
             <ReplyModeToggle
               currentMode={isPendingConversation ? ReplyMode.NOTE : replyMode}
@@ -705,61 +705,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
           </div>
 
           {/* Segunda linha: Botões de formatação + Input + Botões de envio */}
-          <div className="flex items-end gap-2 w-full overflow-visible">
-            {/* Botões de formatação à esquerda */}
-            <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
-              {/* File Upload Button */}
-              <FileUpload
-                onFilesSelected={handleFilesSelected}
-                maxFileSize={100}
-                multiple={true}
-                disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
-              />
-
-              {/* Emoji Button */}
-              <div className="relative">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  disabled={isDisabled || isSending || isPendingConversation}
-                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                  onClick={handleEmojiClick}
-                >
-                  <Smile className="h-4 w-4" />
-                </Button>
-                <EmojiPicker
-                  isOpen={showEmojiPicker}
-                  onEmojiSelect={handleEmojiSelect}
-                  onClose={() => setShowEmojiPicker(false)}
-                />
-              </div>
-              {/* Canned Responses Button */}
-              <Button
-                variant={showCannedResponses ? 'default' : 'ghost'}
-                size="icon"
-                disabled={isDisabled || isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleCannedResponsesClick}
-                title={t('messageInput.cannedResponses.tooltip')}
-              >
-                <MessageSquareText className="h-4 w-4" />
-              </Button>
-
-              {/* Template Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                disabled={isSending || isPendingConversation}
-                className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleTemplateClick}
-                title={t('messageTemplates.button.title')}
-              >
-                <FileText className="h-4 w-4" />
-              </Button>
-            </div>
-
-            {/* Text Input Container */}
-            <div className="flex-1 min-w-0 overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-end gap-2 w-full overflow-visible">
+            {/* Text Input Container - no mobile fica em cima, no desktop no meio */}
+            <div className="flex-1 w-full min-w-0 overflow-hidden order-1 sm:order-2">
               <RichTextEditor
                 ref={richEditorRef}
                 placeholder={
@@ -820,45 +768,100 @@ const MessageInput: React.FC<MessageInputProps> = ({
               />
             </div>
 
-            {/* Action Buttons */}
-            <div className="flex-shrink-0 flex items-center gap-1.5 pb-1">
-              {replyMode === ReplyMode.REPLY && !isPendingConversation && (
-                <Button
-                  variant={isRecordingAudio ? 'default' : 'ghost'}
-                  size="icon"
-                  disabled={isDisabled || isSending}
-                  className={
-                    isRecordingAudio
-                      ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
-                      : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
-                  }
-                  onClick={startAudioRecording}
-                >
-                  <Mic className="h-4 w-4" />
-                </Button>
-              )}
+            {/* Container for buttons on Mobile (so they are on the same line) */}
+            <div className="w-full sm:w-auto flex items-center justify-between sm:contents order-2 sm:order-none mt-1 sm:mt-0">
+              {/* Botões de formatação à esquerda */}
+              <div className="flex-shrink-0 flex items-center gap-1.5 sm:pb-1 sm:order-1">
+                {/* File Upload Button */}
+                <FileUpload
+                  onFilesSelected={handleFilesSelected}
+                  maxFileSize={100}
+                  multiple={true}
+                  disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
+                />
 
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      size="icon"
-                      onClick={handleSend}
-                      disabled={!canSend}
-                      className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
-                    >
-                      {isSending ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
-                      ) : (
-                        <Send className="h-4 w-4" />
-                      )}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{sendButtonTooltip}</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+                {/* Emoji Button */}
+                <div className="relative">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    disabled={isDisabled || isSending || isPendingConversation}
+                    className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                    onClick={handleEmojiClick}
+                  >
+                    <Smile className="h-4 w-4" />
+                  </Button>
+                  <EmojiPicker
+                    isOpen={showEmojiPicker}
+                    onEmojiSelect={handleEmojiSelect}
+                    onClose={() => setShowEmojiPicker(false)}
+                  />
+                </div>
+                {/* Canned Responses Button */}
+                <Button
+                  variant={showCannedResponses ? 'default' : 'ghost'}
+                  size="icon"
+                  disabled={isDisabled || isSending || isPendingConversation}
+                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                  onClick={handleCannedResponsesClick}
+                  title={t('messageInput.cannedResponses.tooltip')}
+                >
+                  <MessageSquareText className="h-4 w-4" />
+                </Button>
+
+                {/* Template Button */}
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  disabled={isSending || isPendingConversation}
+                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
+                  onClick={handleTemplateClick}
+                  title={t('messageTemplates.button.title')}
+                >
+                  <FileText className="h-4 w-4" />
+                </Button>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex-shrink-0 flex items-center gap-1.5 sm:pb-1 sm:order-3">
+                {replyMode === ReplyMode.REPLY && !isPendingConversation && (
+                  <Button
+                    variant={isRecordingAudio ? 'default' : 'ghost'}
+                    size="icon"
+                    disabled={isDisabled || isSending}
+                    className={
+                      isRecordingAudio
+                        ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 shadow-md transition-all duration-200'
+                        : 'h-9 w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
+                    }
+                    onClick={startAudioRecording}
+                  >
+                    <Mic className="h-4 w-4" />
+                  </Button>
+                )}
+
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        size="icon"
+                        onClick={handleSend}
+                        disabled={!canSend}
+                        className="bg-primary hover:bg-primary/85 text-primary-foreground h-9 w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50"
+                      >
+                        {isSending ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Send className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{sendButtonTooltip}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
             </div>
           </div>
         </CardContent>

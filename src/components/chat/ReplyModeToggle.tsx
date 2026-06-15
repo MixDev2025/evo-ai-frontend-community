@@ -22,9 +22,9 @@ export const ReplyModeToggle = ({
   const isNoteMode = effectiveMode === ReplyMode.NOTE;
 
   return (
-    <div className="flex items-center justify-start">
+    <div className="flex flex-wrap items-center justify-start gap-y-2">
       {/* Toggle Container - Tamanho fixo, alinhado à esquerda */}
-      <div className="flex items-center gap-1 p-1 bg-muted rounded-lg border w-fit">
+      <div className="flex items-center gap-1 p-1 bg-muted rounded-lg border w-fit shrink-0">
         {/* Botão Resposta Pública */}
         <Button
           variant={isReplyMode ? 'default' : 'ghost'}

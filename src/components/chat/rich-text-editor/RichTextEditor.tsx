@@ -224,7 +224,7 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
     };
 
     return (
-      <div className={`border border-border rounded-2xl sm:rounded-lg overflow-hidden bg-background ${className}`}>
+      <div className={className ? `overflow-hidden ${className}` : `border border-border rounded-2xl sm:rounded-lg overflow-hidden bg-background`}>
         {showToolbar && (
           <EditorToolbar
             editorState={editorState}

@@ -705,157 +705,156 @@ const MessageInput: React.FC<MessageInputProps> = ({
           </div>
 
           {/* Segunda linha: Botões de formatação + Input + Botões de envio */}
-          <div className="flex items-end gap-1 sm:gap-2 w-full overflow-visible">
-            {/* Botões de formatação à esquerda */}
-            <div className="flex-shrink-0 flex items-center gap-0.5 sm:gap-1.5 pb-1">
-              {/* File Upload Button */}
-              <FileUpload
-                onFilesSelected={handleFilesSelected}
-                maxFileSize={100}
-                multiple={true}
-                disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
-              />
+          <div className="flex items-end gap-1.5 sm:gap-2 w-full overflow-visible">
+            
+            {/* Input Pill Container */}
+            <div className="flex-1 flex items-end bg-background sm:bg-transparent rounded-3xl sm:rounded-none border sm:border-0 min-w-0 overflow-hidden shadow-sm sm:shadow-none">
+              
+              {/* Emoji (Inside left of pill) */}
+              <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 sm:h-auto sm:w-auto sm:pb-1">
+                <div className="relative">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    disabled={isDisabled || isSending || isPendingConversation}
+                    className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                    onClick={handleEmojiClick}
+                  >
+                    <Smile className="h-6 w-6 sm:h-4 sm:w-4" />
+                  </Button>
+                  <EmojiPicker
+                    isOpen={showEmojiPicker}
+                    onEmojiSelect={handleEmojiSelect}
+                    onClose={() => setShowEmojiPicker(false)}
+                  />
+                </div>
+              </div>
 
-              {/* Emoji Button */}
-              <div className="relative">
+              {/* Text Input Container */}
+              <div className="flex-1 min-w-0">
+                <RichTextEditor
+                  ref={richEditorRef}
+                  placeholder={
+                    isPendingConversation
+                      ? t('messageInput.placeholders.pendingNote')
+                      : replyMode === ReplyMode.NOTE
+                        ? t('messageInput.placeholders.privateNote')
+                        : t('messageInput.placeholders.default')
+                  }
+                  onChange={content => {
+                    setCurrentEditorMessage(content);
+                    detectCannedResponseTrigger(content);
+                    if (content.trim()) {
+                      handleTypingStart();
+                    } else {
+                      handleTypingStop();
+                    }
+                  }}
+                  onKeyDown={event => {
+                    if (handleCannedResponseKeyDown(event as unknown as React.KeyboardEvent)) {
+                      return true;
+                    }
+
+                    if (event.altKey) {
+                      if (event.key === 'p' || event.key === 'P') {
+                        event.preventDefault();
+                        setReplyMode(ReplyMode.NOTE);
+                        return true;
+                      }
+                      if (event.key === 'l' || event.key === 'L') {
+                        event.preventDefault();
+                        setReplyMode(ReplyMode.REPLY);
+                        return true;
+                      }
+                    }
+
+                    const messageKey = user?.ui_settings?.editor_message_key || 'enter';
+
+                    if (messageKey === 'enter') {
+                      if (event.key === 'Enter' && !event.shiftKey) {
+                        event.preventDefault();
+                        handleSend();
+                        return true;
+                      }
+                    } else if (messageKey === 'cmd_enter') {
+                      if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
+                        event.preventDefault();
+                        handleSend();
+                        return true;
+                      }
+                    }
+
+                    return false;
+                  }}
+                  disabled={isDisabled || isSending || (isPendingConversation && replyMode !== ReplyMode.NOTE)}
+                  className="min-h-[40px] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] bg-transparent border-0 py-2 sm:py-3"
+                  showToolbar={!isPendingConversation}
+                />
+              </div>
+
+              {/* Right Icons (Inside right of pill) */}
+              <div className="flex-shrink-0 flex items-center justify-end h-10 sm:h-auto sm:pb-1 pr-1 sm:pr-0">
+                {/* File Upload Button */}
+                <FileUpload
+                  onFilesSelected={handleFilesSelected}
+                  maxFileSize={100}
+                  multiple={true}
+                  disabled={isDisabled || isSending || isPendingConversation || hasCannedMedia}
+                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                />
+
+                {/* Canned Responses Button */}
                 <Button
                   variant="ghost"
                   size="icon"
                   disabled={isDisabled || isSending || isPendingConversation}
-                  className="h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                  onClick={handleEmojiClick}
+                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                  onClick={handleCannedResponsesClick}
+                  title={t('messageInput.cannedResponses.tooltip')}
                 >
-                  <Smile className="h-4 w-4" />
+                  <MessageSquareText className="h-5 w-5 sm:h-4 sm:w-4" />
                 </Button>
-                <EmojiPicker
-                  isOpen={showEmojiPicker}
-                  onEmojiSelect={handleEmojiSelect}
-                  onClose={() => setShowEmojiPicker(false)}
-                />
-              </div>
-              {/* Canned Responses Button */}
-              <Button
-                variant={showCannedResponses ? 'default' : 'ghost'}
-                size="icon"
-                disabled={isDisabled || isSending || isPendingConversation}
-                className="h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleCannedResponsesClick}
-                title={t('messageInput.cannedResponses.tooltip')}
-              >
-                <MessageSquareText className="h-4 w-4" />
-              </Button>
 
-              {/* Template Button */}
-              <Button
-                variant="ghost"
-                size="icon"
-                disabled={isSending || isPendingConversation}
-                className="h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50"
-                onClick={handleTemplateClick}
-                title={t('messageTemplates.button.title')}
-              >
-                <FileText className="h-4 w-4" />
-              </Button>
-            </div>
-
-            {/* Text Input Container */}
-            <div className="flex-1 min-w-0 overflow-hidden">
-              <RichTextEditor
-                ref={richEditorRef}
-                placeholder={
-                  isPendingConversation
-                    ? t('messageInput.placeholders.pendingNote')
-                    : replyMode === ReplyMode.NOTE
-                      ? t('messageInput.placeholders.privateNote')
-                      : t('messageInput.placeholders.default')
-                }
-                onChange={content => {
-                  setCurrentEditorMessage(content);
-                  detectCannedResponseTrigger(content);
-                  if (content.trim()) {
-                    handleTypingStart();
-                  } else {
-                    handleTypingStop();
-                  }
-                }}
-                onKeyDown={event => {
-                  if (handleCannedResponseKeyDown(event as unknown as React.KeyboardEvent)) {
-                    return true;
-                  }
-
-                  if (event.altKey) {
-                    if (event.key === 'p' || event.key === 'P') {
-                      event.preventDefault();
-                      setReplyMode(ReplyMode.NOTE);
-                      return true;
-                    }
-                    if (event.key === 'l' || event.key === 'L') {
-                      event.preventDefault();
-                      setReplyMode(ReplyMode.REPLY);
-                      return true;
-                    }
-                  }
-
-                  const messageKey = user?.ui_settings?.editor_message_key || 'enter';
-
-                  if (messageKey === 'enter') {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                      event.preventDefault();
-                      handleSend();
-                      return true;
-                    }
-                  } else if (messageKey === 'cmd_enter') {
-                    if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) {
-                      event.preventDefault();
-                      handleSend();
-                      return true;
-                    }
-                  }
-
-                  return false;
-                }}
-                disabled={isDisabled || isSending || (isPendingConversation && replyMode !== ReplyMode.NOTE)}
-                className="min-h-[40px] sm:min-h-[100px]"
-                showToolbar={!isPendingConversation}
-              />
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex-shrink-0 flex items-center gap-0.5 sm:gap-1.5 pb-1">
-              {replyMode === ReplyMode.REPLY && !isPendingConversation && (
+                {/* Template Button - Hidden on mobile as requested */}
                 <Button
-                  variant={isRecordingAudio ? 'default' : 'ghost'}
+                  variant="ghost"
                   size="icon"
-                  disabled={isDisabled || isSending}
-                  className={
-                    isRecordingAudio
-                      ? 'bg-primary hover:bg-primary/85 text-primary-foreground h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 shadow-md transition-all duration-200'
-                      : 'h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 hover:bg-accent transition-all duration-200'
-                  }
-                  onClick={startAudioRecording}
+                  disabled={isSending || isPendingConversation}
+                  className="hidden sm:flex h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                  onClick={handleTemplateClick}
+                  title={t('messageTemplates.button.title')}
                 >
-                  <Mic className="h-4 w-4" />
+                  <FileText className="h-4 w-4" />
                 </Button>
-              )}
+              </div>
+            </div>
 
+            {/* Action Buttons (Outside Pill) */}
+            <div className="flex-shrink-0 flex items-center pb-0.5 sm:pb-1">
               <TooltipProvider>
                 <Tooltip>
                   <TooltipTrigger asChild>
                     <Button
                       size="icon"
-                      onClick={handleSend}
-                      disabled={!canSend}
-                      className="bg-primary hover:bg-primary/85 text-primary-foreground h-8 w-8 sm:h-9 sm:w-9 flex-shrink-0 disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50 rounded-full sm:rounded-md"
+                      onClick={canSend || selectedFiles.length > 0 ? handleSend : startAudioRecording}
+                      disabled={isDisabled || isSending || (!canSend && selectedFiles.length === 0 && (replyMode !== ReplyMode.REPLY || isPendingConversation))}
+                      className={`
+                        flex-shrink-0 rounded-full h-11 w-11 sm:h-9 sm:w-9 sm:rounded-md transition-all duration-200 shadow-sm sm:shadow-none
+                        ${isRecordingAudio ? 'bg-destructive hover:bg-destructive/90 text-destructive-foreground' : 'bg-primary hover:bg-primary/90 text-primary-foreground'}
+                        disabled:bg-muted disabled:text-muted-foreground disabled:opacity-50
+                      `}
                     >
                       {isSending ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="h-5 w-5 sm:h-4 sm:w-4 animate-spin" />
+                      ) : canSend || selectedFiles.length > 0 ? (
+                        <Send className="h-5 w-5 sm:h-4 sm:w-4 sm:ml-1" />
                       ) : (
-                        <Send className="h-4 w-4 sm:ml-1" />
+                        <Mic className="h-5 w-5 sm:h-4 sm:w-4" />
                       )}
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{sendButtonTooltip}</p>
+                    <p>{canSend || selectedFiles.length > 0 ? sendButtonTooltip : t('messageInput.audio.tooltip', 'Gravar Áudio')}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

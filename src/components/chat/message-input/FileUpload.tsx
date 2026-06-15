@@ -10,6 +10,7 @@ interface FileUploadProps {
   allowedTypes?: string[];
   multiple?: boolean;
   disabled?: boolean;
+  className?: string;
 }
 
 const FileUpload: React.FC<FileUploadProps> = ({
@@ -26,6 +27,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
   ],
   multiple = true,
   disabled = false,
+  className,
 }) => {
   const { t } = useLanguage('chat');
   const [isDragOver, setIsDragOver] = useState(false);
@@ -159,7 +161,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
       {/* Upload Button */}
       <Button
-        variant="outline"
+        variant={className ? 'ghost' : 'outline'}
         size="icon"
         onClick={() => {
           if (!disabled) {
@@ -167,7 +169,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
           }
         }}
         disabled={disabled}
-        className="flex-shrink-0"
+        className={className || "flex-shrink-0"}
         title={t('messageInput.fileUpload.attachFiles')}
       >
         <Paperclip className="h-4 w-4" />

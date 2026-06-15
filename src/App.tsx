@@ -10,6 +10,7 @@ import { PermissionsProvider } from './contexts/PermissionsContext';
 import { UISettingsApplier } from './components/UISettingsApplier';
 import { unlockAudioContext } from '@/utils/audioNotificationUtils';
 import { PluginHostProvider, PluginSlot } from '@/plugin-host';
+import { PWAInstallPrompt } from './components/PWAInstallPrompt';
 
 import { Toaster } from '@evoapi/design-system';
 
@@ -69,6 +70,7 @@ function App() {
               <AppInitializer>
                 <PluginSlot id="notifications.banner" />
                 <ImpersonationBar />
+                <PWAInstallPrompt />
                 <AppRouter />
                 <ThemedToaster />
               </AppInitializer>

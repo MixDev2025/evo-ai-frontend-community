@@ -636,7 +636,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         )}
 
         {/* Input Area */}
-        <CardContent className="p-4 px-4 py-4 relative">
+        <CardContent className="p-2 sm:p-4 relative">
           {/* 🎯 CANNED RESPONSES: Dropdown de sugestões */}
           {showCannedResponses && (
             <CannedResponsesList
@@ -708,7 +708,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           <div className="flex items-end gap-1.5 sm:gap-2 w-full overflow-visible">
             
             {/* Input Pill Container */}
-            <div className="flex-1 flex items-end bg-background sm:bg-transparent rounded-3xl sm:rounded-none border sm:border-0 min-w-0 overflow-hidden shadow-sm sm:shadow-none">
+            <div className="flex-1 flex items-center sm:items-end bg-background sm:bg-transparent rounded-3xl sm:rounded-none border sm:border-0 min-w-0 overflow-hidden shadow-sm sm:shadow-none">
               
               {/* Emoji (Inside left of pill) */}
               <div className="flex-shrink-0 flex items-center justify-center h-10 w-10 sm:h-auto sm:w-auto sm:pb-1">
@@ -787,7 +787,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     return false;
                   }}
                   disabled={isDisabled || isSending || (isPendingConversation && replyMode !== ReplyMode.NOTE)}
-                  className="min-h-[40px] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] bg-transparent border-0 py-2 sm:py-3"
+                  className="min-h-[20px] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] bg-transparent border-0 py-1 sm:py-3"
                   showToolbar={!isPendingConversation}
                 />
               </div>
@@ -803,28 +803,28 @@ const MessageInput: React.FC<MessageInputProps> = ({
                   className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
                 />
 
-                {/* Canned Responses Button */}
+                {/* Canned Responses Button - Hidden on mobile */}
                 <Button
                   variant="ghost"
                   size="icon"
                   disabled={isDisabled || isSending || isPendingConversation}
-                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                  className="hidden sm:flex h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
                   onClick={handleCannedResponsesClick}
                   title={t('messageInput.cannedResponses.tooltip')}
                 >
-                  <MessageSquareText className="h-5 w-5 sm:h-4 sm:w-4" />
+                  <MessageSquareText className="h-4 w-4" />
                 </Button>
 
-                {/* Template Button - Hidden on mobile as requested */}
+                {/* Template Button - Visible on all screens */}
                 <Button
                   variant="ghost"
                   size="icon"
                   disabled={isSending || isPendingConversation}
-                  className="hidden sm:flex h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
+                  className="h-9 w-9 flex-shrink-0 hover:bg-accent disabled:opacity-50 text-muted-foreground"
                   onClick={handleTemplateClick}
                   title={t('messageTemplates.button.title')}
                 >
-                  <FileText className="h-4 w-4" />
+                  <FileText className="h-5 w-5 sm:h-4 sm:w-4" />
                 </Button>
               </div>
             </div>

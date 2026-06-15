@@ -70,30 +70,37 @@ const EmojiPicker: React.FC<EmojiPickerProps> = ({ onEmojiSelect, onClose, isOpe
   };
 
   return (
-    <div
-      ref={pickerRef}
-      className="absolute bottom-full left-0 mb-2 z-[9999]"
-      style={{
-        minWidth: '350px',
-        maxWidth: '350px',
-      }}
-    >
-      <div className="bg-background border-2 border-border rounded-lg shadow-2xl overflow-hidden">
-        <EmojiPickerReact
-          onEmojiClick={handleEmojiClick}
-          theme={emojiTheme}
-          searchPlaceHolder={t('messageInput.emojiPicker.searchPlaceholder')}
-          width="350px"
-          height="400px"
-          previewConfig={{
-            showPreview: false,
-          }}
-          skinTonesDisabled={false}
-          searchDisabled={false}
-          lazyLoadEmojis={true}
-        />
+    <>
+      {/* Mobile: Full-screen overlay backdrop */}
+      <div
+        className="fixed inset-0 bg-black/30 z-[9998] sm:hidden"
+        onClick={onClose}
+      />
+      <div
+        ref={pickerRef}
+        className="fixed bottom-0 left-0 right-0 z-[9999] sm:absolute sm:bottom-full sm:left-0 sm:right-auto sm:mb-2"
+        style={{
+          minWidth: undefined,
+          maxWidth: undefined,
+        }}
+      >
+        <div className="bg-background border-t-2 sm:border-2 border-border sm:rounded-lg shadow-2xl overflow-hidden rounded-t-2xl sm:rounded-t-lg">
+          <EmojiPickerReact
+            onEmojiClick={handleEmojiClick}
+            theme={emojiTheme}
+            searchPlaceHolder={t('messageInput.emojiPicker.searchPlaceholder')}
+            width="100%"
+            height="350px"
+            previewConfig={{
+              showPreview: false,
+            }}
+            skinTonesDisabled={false}
+            searchDisabled={false}
+            lazyLoadEmojis={true}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

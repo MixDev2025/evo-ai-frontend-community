@@ -172,7 +172,7 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
         editable: () => !disabled,
         attributes: {
           class:
-            'prosemirror-editor p-2 sm:p-3 min-h-[40px] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] overflow-y-auto focus:outline-none resize-none text-sm leading-relaxed text-foreground',
+            'prosemirror-editor p-2 sm:p-3 min-h-[1.5em] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] overflow-y-auto focus:outline-none resize-none text-sm leading-relaxed text-foreground',
           'data-placeholder': placeholder,
         },
       });

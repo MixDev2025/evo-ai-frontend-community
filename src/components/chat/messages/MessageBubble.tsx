@@ -17,9 +17,10 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@evoapi/design-system/alert-dialog';
-import { LockIcon, Reply, Copy, Trash2, AlertTriangle, Shield, Ban } from 'lucide-react';
+import { LockIcon, Reply, Copy, Trash2, AlertTriangle, Shield, Ban, Check, CheckCheck, Clock, AlertCircle } from 'lucide-react';
 import { Message, MESSAGE_TYPE } from '@/types/chat/api';
 import { useLanguage } from '@/hooks/useLanguage';
+import { formatMessageTime } from '@/utils/time/timeHelpers';
 import MessageText from '@/components/chat/messages/MessageText';
 import MessageImage from '@/components/chat/messages/MessageImage';
 import MessageFile from '@/components/chat/messages/MessageFile';
@@ -399,7 +400,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
 
   // Regular messages (incoming/outgoing/bot) - estilo padrão
   return (
-    <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} ${isThreadReply ? 'mb-1' : 'mb-4'}`}>
+    <div className={`flex ${isOwn ? 'justify-end' : 'justify-start'} ${isThreadReply ? 'mb-0.5' : 'mb-1'}`}>
       {/* 👤 Avatar: REMOVIDO - não mostrar avatar nas mensagens */}
       {/* {!isOwn && showAvatar && !isThreadReply && (
         <Avatar className="w-8 h-8 mr-2 flex-shrink-0">
@@ -427,11 +428,10 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
             destaca o participante acima da bolha. Em 1:1, mantém o comportamento antigo. */}
         {!isOwn && (message.content_attributes?.sender_name || isThreadReply || !showAvatar) && (
           <div
-            className={`text-xs mb-1 flex items-center gap-1.5 ${
-              message.content_attributes?.sender_name
+            className={`text-xs mb-1 flex items-center gap-1.5 ${message.content_attributes?.sender_name
                 ? 'font-medium text-primary'
                 : 'text-muted-foreground'
-            }`}
+              }`}
           >
             {message.content_attributes?.sender_name ||
               message.sender?.name ||
@@ -462,19 +462,17 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
         {renderContextMenu(
           <div
             className={`rounded-lg px-3 py-2 ${isDeleted ? 'cursor-default' : 'cursor-pointer'} ${isThreadReply
-              ? 'rounded-tl-md' // Canto superior esquerdo mais suave para replies
+              ? 'rounded-tl-md'
               : ''
               } ${isPrivate
                 ? 'bg-orange-50 border-2 border-orange-200 border-l-4 border-l-orange-400 dark:bg-orange-950/20 dark:border-orange-800/50 dark:border-l-orange-600'
-                : isFromAgent
-                  ? 'bg-primary text-primary-foreground hover:bg-primary/85'
-                  : isFromBot
-                    ? 'bg-purple-600 text-white dark:bg-purple-700'
-                    : isOwn
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/85'
-                      : isThreadReply
-                        ? 'bg-muted/70 border border-l-2 border-l-primary/40 dark:bg-muted/50' // Estilo mais sutil para replies
-                        : 'bg-muted border'
+                : isFromBot
+                  ? 'bg-purple-600 text-white dark:bg-purple-700'
+                  : isOwn || isFromAgent
+                    ? 'bg-[#DCF8C6] dark:bg-[#005C4B] text-[#111B21] dark:text-[#E9EDEF]'
+                    : isThreadReply
+                      ? 'bg-white dark:bg-[#202C33] border border-l-2 border-l-primary/40 shadow-sm'
+                      : 'bg-white dark:bg-[#202C33] shadow-sm'
               }`}
           >
             {/* Indicador de mensagem privada */}
@@ -512,16 +510,51 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
             )}
 
             {isDeleted ? (
-                <div className="italic text-muted-foreground text-sm opacity-70">
-                  {t('messages.messageBubble.deletedPlaceholder', 'This message was deleted')}
-                </div>
-              ) : (
-                <div>{renderMessageContent()}</div>
-              )}
+              <div className="italic text-muted-foreground text-sm opacity-70">
+                {t('messages.messageBubble.deletedPlaceholder', 'This message was deleted')}
+              </div>
+            ) : (
+              <div>{renderMessageContent()}</div>
+            )}
+
+            {showTimestamp && (
+              <div className="flex items-center justify-end gap-1 mt-1 -mb-1">
+                <span className="text-[10px] text-[#667781] dark:text-[#8696A0] select-none">
+                  {formatMessageTime(message.created_at)}
+                </span>
+                {isOwn && !message.private && message.status === 'read' && (
+                  <CheckCheck className="h-3 w-3 text-[#53BDEB]" />
+                )}
+                {isOwn && !message.private && message.status === 'delivered' && (
+                  <CheckCheck className="h-3 w-3 text-[#667781] dark:text-[#8696A0]" />
+                )}
+                {isOwn && !message.private && message.status === 'sent' && (
+                  <Check className="h-3 w-3 text-[#667781] dark:text-[#8696A0]" />
+                )}
+                {isOwn && message.private && (
+                  <Check className="h-3 w-3 text-[#667781] dark:text-[#8696A0]" />
+                )}
+                {isOwn && message.status === 'progress' && (
+                  <Clock className="h-3 w-3 text-[#667781] dark:text-[#8696A0]" />
+                )}
+                {isOwn && message.status === 'failed' && (
+                  <span className="inline-flex items-center gap-0.5">
+                    <AlertCircle className="h-3 w-3 text-destructive" />
+                    <span
+                      className="text-[10px] text-destructive cursor-pointer underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        onRetry?.();
+                      }}
+                    >
+                      {t('messages.messageStatus.tryAgain')}
+                    </span>
+                  </span>
+                )}
+              </div>
+            )}
           </div>,
         )}
-
-        {showTimestamp && <MessageStatus message={message} isOwn={isOwn} onRetry={onRetry} />}
       </div>
 
       {/* Alert Dialog para confirmação de exclusão */}

@@ -1105,10 +1105,10 @@ const ChatSidebar = ({
                 conversation,
                 <div
                   key={conversation.id}
-                  className={`p-4 hover:bg-accent cursor-pointer transition-colors ${
+                  className={`px-4 py-2.5 hover:bg-[#F0F2F5] dark:hover:bg-[#2A3942] cursor-pointer transition-colors ${
                     isSelected
-                      ? 'bg-primary/10 border-l-2 border-l-primary'
-                      : 'border-b border-border/50'
+                      ? 'bg-[#F0F2F5] dark:bg-[#2A3942] border-l-[3px] border-l-[#00A884] dark:border-l-[#00A884]'
+                      : ''
                   }`}
                   onClick={() => onConversationSelect(conversation)}
                 >

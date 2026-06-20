@@ -53,6 +53,7 @@ export default function AdminSettingsLayout() {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  // Fallback: redirect if no child route matches (index route in route config handles the primary case)
   if (location.pathname === '/settings/admin' || location.pathname === '/settings/admin/') {
     return <Navigate to="/settings/admin/email" replace />;
   }

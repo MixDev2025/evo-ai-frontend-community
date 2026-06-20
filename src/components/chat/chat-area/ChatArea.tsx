@@ -294,7 +294,7 @@ const ChatArea = ({
 
   if (!selectedConversationId) {
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex-1 flex items-center justify-center bg-[#E5DDD5] dark:bg-[#0B141A]">
         <div className="text-center">
           <MessageCircle className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-2">{t('chatArea.selectConversation.title')}</h3>
@@ -307,7 +307,7 @@ const ChatArea = ({
   const typingUsers = websocket.getTypingUsers(selectedConversationId);
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden min-h-0 bg-muted/10">
+    <div className="flex-1 flex flex-col overflow-hidden min-h-0 bg-[#E5DDD5] dark:bg-[#0B141A]">
       {/* 🎯 MESSAGING WINDOW RESTRICTIONS: Banner de aviso (WhatsApp, Instagram, Messenger) */}
       {/* Posicionado no topo, logo após o header, para máxima visibilidade */}
       {shouldShowRestrictionBanner && (
@@ -321,11 +321,11 @@ const ChatArea = ({
 
       {/* Messages Area */}
       {messages.isMessagesLoading(selectedConversationId) ? (
-        <div className="p-4">
+        <div className="p-4 bg-[#E5DDD5] dark:bg-[#0B141A] flex-1">
           <MessageSkeleton count={6} />
         </div>
       ) : messages.getMessagesError(selectedConversationId) ? (
-        <div className="p-4 text-center">
+        <div className="p-4 text-center bg-[#E5DDD5] dark:bg-[#0B141A] flex-1">
           <div className="text-destructive mb-2">{t('chatArea.errors.loadMessages')}</div>
           <p className="text-sm text-muted-foreground mb-4">
             {messages.getMessagesError(selectedConversationId)}

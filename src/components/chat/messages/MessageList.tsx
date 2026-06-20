@@ -100,6 +100,47 @@ const getMessageTimestamp = (message: Message): number => {
 };
 
 // Igual ao MessagesContext: mensagens "em envio" (status progress) sempre por último
+// Helper para formatar data como separador (Today, Yesterday, ou data)
+const formatDateSeparator = (timestamp: number): string => {
+  const messageDate = new Date(timestamp * 1000);
+  const today = new Date();
+  const yesterday = new Date(today);
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  if (
+    messageDate.getDate() === today.getDate() &&
+    messageDate.getMonth() === today.getMonth() &&
+    messageDate.getFullYear() === today.getFullYear()
+  ) {
+    return 'Today';
+  }
+
+  if (
+    messageDate.getDate() === yesterday.getDate() &&
+    messageDate.getMonth() === yesterday.getMonth() &&
+    messageDate.getFullYear() === yesterday.getFullYear()
+  ) {
+    return 'Yesterday';
+  }
+
+  return messageDate.toLocaleDateString('en-US', {
+    day: 'numeric',
+    month: 'long',
+    year: messageDate.getFullYear() !== today.getFullYear() ? 'numeric' : undefined,
+  });
+};
+
+// Verifica se duas mensagens são do mesmo dia
+const isSameDay = (a: Message, b: Message): boolean => {
+  const dateA = new Date(getMessageTimestamp(a) * 1000);
+  const dateB = new Date(getMessageTimestamp(b) * 1000);
+  return (
+    dateA.getDate() === dateB.getDate() &&
+    dateA.getMonth() === dateB.getMonth() &&
+    dateA.getFullYear() === dateB.getFullYear()
+  );
+};
+
 const compareMessagesByTimestamp = (a: Message, b: Message): number => {
   const aSending = a.status === 'progress';
   const bSending = b.status === 'progress';
@@ -310,7 +351,7 @@ const MessageList: React.FC<MessageListProps> = ({
   // Loading durante carregamento inicial
   if (isInitialLoading) {
     return (
-      <div className="flex-1 flex items-center justify-center bg-background">
+      <div className="flex-1 flex items-center justify-center bg-[#E5DDD5] dark:bg-[#0B141A]">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-8 w-8 animate-spin text-primary" />
           <div className="text-sm text-muted-foreground">{t('messages.messageList.loadingConversation')}</div>
@@ -324,11 +365,11 @@ const MessageList: React.FC<MessageListProps> = ({
       {/* Messages Container */}
       <div
         ref={scrollRef}
-        className="flex-1 overflow-y-scroll overflow-x-hidden p-4"
+        className="flex-1 overflow-y-scroll overflow-x-hidden px-3 py-2 bg-[#E5DDD5] dark:bg-[#0B141A]"
         onScroll={handleScroll}
         style={{ scrollBehavior: 'auto' }}
       >
-        <div className="space-y-3">
+        <div className="flex flex-col">
           {/* Loading indicator para scroll infinito */}
 
           {/* Loading mensagens antigas */}
@@ -356,6 +397,15 @@ const MessageList: React.FC<MessageListProps> = ({
 
           {/* Lista de mensagens */}
           {(() => {
+            // Separador de data entre dias diferentes (estilo WhatsApp)
+            const renderDateSeparator = (dateLabel: string) => (
+              <div className="flex justify-center my-2">
+                <span className="text-[11px] text-[#667781] dark:text-[#8696A0] bg-[#E5DDD5]/80 dark:bg-[#182229]/80 px-2.5 py-0.5 rounded-md shadow-sm">
+                  {dateLabel}
+                </span>
+              </div>
+            );
+
             // 🧵 Agrupar mensagens por thread para conversas de post (suporta respostas aninhadas)
             if (isPostConversation) {
               // Encontrar mensagens raiz (sem in_reply_to ou in_reply_to_external_id) e suas respostas
@@ -562,9 +612,12 @@ const MessageList: React.FC<MessageListProps> = ({
               });
             }
 
+            let lastDateMessage: Message | null = null;
+
             return allOrderedMessages.map((message, index) => {
               // Mensagens de sistema são renderizadas separadamente
               if (message.message_type === MESSAGE_TYPE.ACTIVITY || message.message_type === MESSAGE_TYPE.TEMPLATE) {
+                lastDateMessage = message;
                 return (
                   <div key={`system-${message.id}-${index}`} data-message-id={message.id}>
                     <SystemMessage message={message} labels={labels} />
@@ -572,26 +625,31 @@ const MessageList: React.FC<MessageListProps> = ({
                 );
               }
 
-              const isIncoming = message.message_type === MESSAGE_TYPE.INCOMING;
+              // Separador de data (estilo WhatsApp)
+              const showDateSeparator = lastDateMessage && !isSameDay(lastDateMessage, message);
+              const dateSeparator = showDateSeparator ? formatDateSeparator(getMessageTimestamp(message)) : null;
+
+              lastDateMessage = message;
+
               const isOutgoing = message.message_type === MESSAGE_TYPE.OUTGOING;
               const isBot = message.sender?.type === 'agent_bot';
               const isAgent = message.sender?.type === 'user' || (isOutgoing && !isBot);
               const isOwn = isOutgoing;
               const isFromBot = isOutgoing && isBot;
               const isFromAgent = isOutgoing && isAgent;
-              const showAvatar = isIncoming;
 
               // Get moderation for this message
               const moderation = messageModerations?.get(message.id);
 
               return (
                 <div key={`${message.id}-${index}`} data-message-id={message.id}>
+                  {dateSeparator && renderDateSeparator(dateSeparator)}
                   <MessageBubble
                     message={message}
                     isOwn={isOwn}
                     isFromBot={isFromBot}
                     isFromAgent={isFromAgent}
-                    showAvatar={showAvatar}
+                    showAvatar={false}
                     showTimestamp={true}
                     labels={labels}
                     allMessages={messages}

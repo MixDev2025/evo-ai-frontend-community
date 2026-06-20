@@ -351,7 +351,7 @@ export default function StorageConfig() {
                   )}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="STORAGE_ACCESS_KEY_ID">{t('storage.fields.accessKeyId')}</Label>
                     <Input
@@ -366,7 +366,7 @@ export default function StorageConfig() {
                   {renderSecretField('STORAGE_ACCESS_SECRET', t('storage.fields.accessSecret'), t('storage.placeholders.accessSecret'))}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="STORAGE_REGION">{t('storage.fields.region')}</Label>
                     <Input

@@ -332,7 +332,7 @@ export default function SmtpConfig() {
             {/* SMTP fields */}
             {mailerType === 'smtp' && (
               <>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="SMTP_ADDRESS">{t('email.fields.host')}</Label>
                     <Input
@@ -358,7 +358,7 @@ export default function SmtpConfig() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="SMTP_USERNAME">{t('email.fields.username')}</Label>
                     <Input
@@ -370,7 +370,7 @@ export default function SmtpConfig() {
                   {renderSecretField('SMTP_PASSWORD_SECRET', t('email.fields.password'), t('email.placeholders.password'))}
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="SMTP_AUTHENTICATION">{t('email.fields.authentication')}</Label>
                     <Controller
@@ -400,7 +400,7 @@ export default function SmtpConfig() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-3 pt-6">
                     <Controller
                       name={'SMTP_ENABLE_STARTTLS_AUTO' as EmailFieldKey}

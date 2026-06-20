@@ -15,8 +15,19 @@ initTheme();
 // Inicialização do Google Analytics 4
 initGA4();
 
+// Splash screen removal - React vai substituir o conteúdo do #root automaticamente
+// ao fazer mount, removendo o splash screen nativo do PWA
+
 // ⚡ OTIMIZAÇÃO: StrictMode removido para evitar duplicação de requests
 // Em desenvolvimento, StrictMode executa useEffect 2x para detectar problemas
-createRoot(document.getElementById('root')!).render(
-    <App />
-);
+const root = document.getElementById('root')!;
+const splash = document.getElementById('app-splash');
+
+if (splash) {
+  // Pequeno atraso para garantir transição suave do splash para o app
+  requestAnimationFrame(() => {
+    createRoot(root).render(<App />);
+  });
+} else {
+  createRoot(root).render(<App />);
+}

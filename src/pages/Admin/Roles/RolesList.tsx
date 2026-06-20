@@ -137,8 +137,8 @@ export default function RolesList() {
             className="h-full"
           />
         ) : (
-          <div className="rounded-md border border-sidebar-border overflow-hidden">
-            <table className="w-full text-sm">
+          <div className="rounded-md border border-sidebar-border overflow-hidden overflow-x-auto">
+            <table className="w-full text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b border-sidebar-border bg-sidebar-accent/50">
                   <th className="px-4 py-3 text-left font-medium text-sidebar-foreground">{t('table.name')}</th>
@@ -157,10 +157,13 @@ export default function RolesList() {
                   >
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium text-sidebar-foreground">{role.name}</span>
+                        <span className="font-medium text-sidebar-foreground truncate max-w-[120px] sm:max-w-none">{role.name}</span>
                         {role.system && (
-                          <Badge variant="secondary" className="text-xs">{t('badges.system')}</Badge>
+                          <Badge variant="secondary" className="text-xs shrink-0">{t('badges.system')}</Badge>
                         )}
+                        <Badge variant="outline" className="text-xs capitalize shrink-0 sm:hidden">
+                          {t(`type.${role.type}`)}
+                        </Badge>
                       </div>
                     </td>
                     <td className="px-4 py-3 text-sidebar-foreground/60 hidden md:table-cell max-w-xs truncate">

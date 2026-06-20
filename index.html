@@ -1,15 +1,119 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#009363" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#009363" media="(prefers-color-scheme: light)" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ChatMix" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="ChatMix" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="description" content="Plataforma inteligente de atendimento ao cliente com IA multicanal" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
     <link rel="manifest" href="/manifest.json" />
-    <meta name="theme-color" content="#009363" />
+
+    <!-- Startup splash screen configuration -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <title>ChatMix</title>
+
+    <!-- Inline splash/loading screen styles -->
+    <style>
+      .app-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #0F1923;
+        transition: opacity 0.4s ease-out;
+      }
+      .app-splash.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .app-splash-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #0F1923, #1A1A2E);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      .app-splash-icon svg {
+        width: 56px;
+        height: 56px;
+      }
+      .app-splash-title {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 22px;
+        font-weight: 700;
+        color: #00FFA7;
+        margin-bottom: 8px;
+      }
+      .app-splash-subtitle {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        color: rgba(255,255,255,0.5);
+        font-weight: 400;
+      }
+      .app-splash-spinner {
+        margin-top: 32px;
+        width: 24px;
+        height: 24px;
+        border: 2px solid rgba(0,255,167,0.2);
+        border-top-color: #00FFA7;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="app-splash" id="app-splash">
+        <div class="app-splash-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 512 512">
+            <defs>
+              <linearGradient id="sg1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#00FFA7"/>
+                <stop offset="100%" stop-color="#00D68F"/>
+              </linearGradient>
+              <linearGradient id="sg2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#00B8FF"/>
+                <stop offset="100%" stop-color="#4A00E0"/>
+              </linearGradient>
+            </defs>
+            <path d="M370 200c0-55-45-100-100-100s-100 45-100 100c0 30 13 57 34 76l-18 54 58-28c23 8 48 9 72 2l57 28-18-56c20-18 33-44 33-72l-18-4z" fill="url(#sg1)" opacity="0.9"/>
+            <path d="M280 180c0-44-36-80-80-80s-80 36-80 80c0 24 11 46 28 61l-14 44 48-24c18 7 38 8 56 2l46 24-14-46c16-15 26-36 26-59l-16-2z" fill="url(#sg2)" opacity="0.85" transform="translate(30, 60)"/>
+          </svg>
+        </div>
+        <div class="app-splash-title">ChatMix</div>
+        <div class="app-splash-subtitle">Carregando...</div>
+        <div class="app-splash-spinner"></div>
+      </div>
+    </div>
+    <script>
+      window.addEventListener('load', function() {
+        var splash = document.getElementById('app-splash');
+        if (splash) {
+          splash.classList.add('hidden');
+          setTimeout(function() { splash.remove(); }, 500);
+        }
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

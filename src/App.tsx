@@ -11,6 +11,7 @@ import { UISettingsApplier } from './components/UISettingsApplier';
 import { unlockAudioContext } from '@/utils/audioNotificationUtils';
 import { PluginHostProvider, PluginSlot } from '@/plugin-host';
 import { PWAInstallPrompt } from './components/PWAInstallPrompt';
+import { UpdateNotification } from './components/UpdateNotification';
 
 import { Toaster } from '@evoapi/design-system';
 
@@ -71,6 +72,7 @@ function App() {
                 <PluginSlot id="notifications.banner" />
                 <ImpersonationBar />
                 <PWAInstallPrompt />
+                <UpdateNotification />
                 <AppRouter />
                 <ThemedToaster />
               </AppInitializer>

@@ -1,16 +1,51 @@
 {
-  "name": "ChatMix",
+  "name": "ChatMix - Plataforma de Atendimento",
   "short_name": "ChatMix",
+  "description": "Plataforma inteligente de atendimento ao cliente com IA multicanal",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#ffffff",
+  "display_override": ["window-controls-overlay", "standalone"],
+  "background_color": "#0F1923",
   "theme_color": "#009363",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "scope": "/",
+  "categories": ["business", "communication", "productivity"],
+  "prefer_related_applications": false,
+  "related_applications": [],
   "icons": [
     {
       "src": "/favicon.svg",
-      "sizes": "192x192 512x512",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Conversas",
+      "short_name": "Chat",
+      "description": "Abrir central de conversas",
+      "url": "/conversations"
+    },
+    {
+      "name": "Dashboard",
+      "short_name": "Dashboard",
+      "description": "Abrir dashboard da operação",
+      "url": "/dashboard"
+    },
+    {
+      "name": "Contatos",
+      "short_name": "Contatos",
+      "description": "Gerenciar contatos",
+      "url": "/contacts"
     }
   ]
 }

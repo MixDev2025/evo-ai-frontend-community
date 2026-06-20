@@ -270,7 +270,7 @@ const CustomerDashboardPage = () => {
   }
 
   return (
-    <div className="h-full flex flex-col p-4 gap-6">
+    <div className="h-full flex flex-col p-3 sm:p-4 gap-4 sm:gap-6 min-w-0 overflow-x-hidden">
       <DashboardTour />
       <div data-tour="dashboard-header">
         <BaseHeader

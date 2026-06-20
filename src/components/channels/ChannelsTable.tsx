@@ -36,11 +36,12 @@ export default function ChannelsTable({
     {
       key: 'display_name',
       label: t('table.displayName'),
+      hiddenOnMobile: true,
       render: (item: Inbox) => (
         <span className="text-sidebar-foreground">{item.display_name || '—'}</span>
       ),
     },
-    { key: 'id', label: t('table.id') },
+    { key: 'id', label: t('table.id'), hiddenOnMobile: true },
   ];
 
   const actions: TableAction<Inbox>[] = [

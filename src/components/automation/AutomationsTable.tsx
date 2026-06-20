@@ -40,7 +40,6 @@ export default function AutomationsTable({
       key: 'name',
       label: t('table.columns.name'),
       sortable: true,
-      width: '300px',
       render: (rule) => (
         <div>
           <div className="font-medium truncate">{rule.name}</div>
@@ -53,7 +52,7 @@ export default function AutomationsTable({
     {
       key: 'event_name',
       label: t('table.columns.event'),
-      width: '200px',
+      hiddenOnTablet: true,
       render: (rule) => (
         <Badge variant="outline">{t(`form.fields.event.options.${rule.event_name}`)}</Badge>
       ),
@@ -61,7 +60,6 @@ export default function AutomationsTable({
     {
       key: 'active',
       label: t('table.columns.status'),
-      width: '120px',
       render: (rule) => (
         <Badge variant={rule.active ? 'default' : 'secondary'}>
           {rule.active ? t('table.status.active') : t('table.status.inactive')}
@@ -71,7 +69,7 @@ export default function AutomationsTable({
     {
       key: 'actions_count',
       label: t('table.columns.actionsCount'),
-      width: '120px',
+      hiddenOnTablet: true,
       render: (rule) => (
         <span className="text-sm text-muted-foreground">{rule.actions?.length ?? 0}</span>
       ),
@@ -80,7 +78,7 @@ export default function AutomationsTable({
       key: 'created_at',
       label: t('table.columns.createdAt'),
       sortable: true,
-      width: '180px',
+      hiddenOnMobile: true,
       render: (rule) => {
         const ts = (rule as unknown as { created_at?: string; created_on?: number }).created_at;
         const fallback = (rule as unknown as { created_on?: number }).created_on;

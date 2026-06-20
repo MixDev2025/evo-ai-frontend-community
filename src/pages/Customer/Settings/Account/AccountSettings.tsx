@@ -39,12 +39,12 @@ function SectionLayout({
 }: SectionLayoutProps) {
   return (
     <section className={`pt-8 ${withBorder ? 'border-t border-sidebar-border' : ''} pb-8`}>
-      <div className="grid grid-cols-4 gap-5 mb-5">
-        <div className="col-span-3">
+      <div className="grid grid-cols-1 sm:grid-cols-4 gap-5 mb-5">
+        <div className="sm:col-span-3">
           <h4 className="text-lg font-medium text-sidebar-foreground mb-2">{title}</h4>
           <p className="text-sidebar-foreground/70 text-sm">{description}</p>
         </div>
-        <div className="col-span-1 flex justify-end">{headerActions}</div>
+        <div className="sm:col-span-1 flex sm:justify-end">{headerActions}</div>
       </div>
       <div className="text-sidebar-foreground">{children}</div>
     </section>
@@ -419,7 +419,7 @@ export default function AccountSettings() {
                       onChange={e =>
                         handleFieldChange('autoResolveAfter', parseInt(e.target.value) || 0)
                       }
-                      className={`w-32 bg-sidebar border-sidebar-border text-sidebar-foreground ${
+                      className={`w-full sm:w-32 bg-sidebar border-sidebar-border text-sidebar-foreground ${
                         errors.autoResolveAfter ? 'border-red-500' : ''
                       }`}
                     />

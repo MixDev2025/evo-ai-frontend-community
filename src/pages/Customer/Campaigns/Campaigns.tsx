@@ -12,7 +12,7 @@ import {
   Button,
   Label,
 } from '@evoapi/design-system';
-import { Megaphone } from 'lucide-react';
+import { Grid3X3, List, Megaphone } from 'lucide-react';
 import EmptyState from '@/components/base/EmptyState';
 
 import { useUserPermissions } from '@/hooks/useUserPermissions';
@@ -24,6 +24,7 @@ import {
   CampaignsHeader,
   CampaignsPagination,
   CampaignsTable,
+  CampaignCard,
 } from '@/components/campaigns';
 
 const INITIAL_STATE: CampaignsState = {
@@ -67,6 +68,7 @@ export default function Campaigns() {
   const [statsDialogOpen, setStatsDialogOpen] = useState(false);
   const [detailsDialogOpen, setDetailsDialogOpen] = useState(false);
   const [detailsLoading, setDetailsLoading] = useState(false);
+  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
   const [detailsCampaign, setDetailsCampaign] = useState<Campaign | null>(null);
   const [statsCampaign, setStatsCampaign] = useState<Campaign | null>(null);
   const [statsData, setStatsData] = useState<Campaign['stats'] | null>(null);
@@ -376,6 +378,30 @@ export default function Campaigns() {
         showFilters={true}
       />
 
+      {/* View Mode Toggle */}
+      {state.campaigns.length > 0 && (
+        <div className="flex items-center justify-end mb-3">
+          <div className="flex items-center border rounded-lg">
+            <Button
+              variant={viewMode === 'cards' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setViewMode('cards')}
+              className="border-0 rounded-r-none"
+            >
+              <Grid3X3 className="h-4 w-4" />
+            </Button>
+            <Button
+              variant={viewMode === 'table' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setViewMode('table')}
+              className="border-0 rounded-l-none"
+            >
+              <List className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Content */}
       <div className="flex-1 overflow-auto">
         {state.loading.list ? (
@@ -393,6 +419,23 @@ export default function Campaigns() {
             }}
             className="h-full"
           />
+        ) : viewMode === 'cards' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {state.campaigns.map(campaign => (
+              <CampaignCard
+                key={campaign.id}
+                campaign={campaign}
+                onViewDetails={handleCampaignClick}
+                onEdit={handleEditCampaign}
+                onDelete={handleDeleteCampaign}
+                onPause={handlePauseCampaign}
+                onResume={handleStartCampaign}
+                onStop={handleStopCampaign}
+                onDuplicate={handleDuplicateCampaign}
+                onViewStats={handleViewStats}
+              />
+            ))}
+          </div>
         ) : (
           <CampaignsTable
             campaigns={state.campaigns}

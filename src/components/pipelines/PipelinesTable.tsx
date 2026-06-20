@@ -101,7 +101,7 @@ export default function PipelinesTable({
               {t('pipelinesTable.columns.name')}
               {renderSortIcon('name')}
             </TableHead>
-            <TableHead>{t('pipelinesTable.columns.type')}</TableHead>
+            <TableHead className="hidden md:table-cell">{t('pipelinesTable.columns.type')}</TableHead>
             <TableHead>{t('pipelinesTable.columns.status')}</TableHead>
             <TableHead
               className="cursor-pointer hover:bg-muted/50 text-center"
@@ -110,9 +110,9 @@ export default function PipelinesTable({
               {t('pipelinesTable.columns.conversations')}
               {renderSortIcon('conversations_count')}
             </TableHead>
-            <TableHead className="text-center">{t('pipelinesTable.columns.completedPipelines')}</TableHead>
+            <TableHead className="text-center hidden md:table-cell">{t('pipelinesTable.columns.completedPipelines')}</TableHead>
             <TableHead
-              className="cursor-pointer hover:bg-muted/50"
+              className="cursor-pointer hover:bg-muted/50 hidden lg:table-cell"
               onClick={() => onSort('created_at')}
             >
               {t('pipelinesTable.columns.createdAt')}
@@ -137,7 +137,7 @@ export default function PipelinesTable({
                   </p>
                 )}
               </TableCell>
-              <TableCell>
+              <TableCell className="hidden md:table-cell">
                 <span className={cn(
                   "text-xs px-2 py-1 rounded-full",
                   pipeline.pipeline_type === 'sales' && "bg-green-100 text-green-700 dark:bg-green-900/50 dark:text-green-400",
@@ -145,6 +145,7 @@ export default function PipelinesTable({
                   pipeline.pipeline_type === 'marketing' && "bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-400",
                   pipeline.pipeline_type === 'custom' && "bg-gray-100 text-gray-700 dark:bg-gray-900/50 dark:text-gray-400",
                 )}>
+                  {pipeline.pipeline_type ? pipeline.pipeline_type.charAt(0).toUpperCase() + pipeline.pipeline_type.slice(1) : '-'}
                 </span>
               </TableCell>
               <TableCell>
@@ -160,7 +161,7 @@ export default function PipelinesTable({
               <TableCell className="text-center">
                 {pipeline.conversations_count || 0}
               </TableCell>
-              <TableCell className="text-right">
+              <TableCell className="text-right hidden md:table-cell">
                 {pipeline.services_info?.total_value ? (
                   <span className="text-green-600 dark:text-green-400 font-medium">
                     R$ {formatCurrency(pipeline.services_info.total_value)}
@@ -169,7 +170,7 @@ export default function PipelinesTable({
                   <span className="text-muted-foreground">-</span>
                 )}
               </TableCell>
-              <TableCell>{formatDate(pipeline.created_at as string)}</TableCell>
+              <TableCell className="hidden lg:table-cell">{formatDate(pipeline.created_at as string)}</TableCell>
               <TableCell className="text-right">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>

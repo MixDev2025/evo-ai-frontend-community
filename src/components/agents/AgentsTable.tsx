@@ -98,6 +98,7 @@ export default function AgentsTable({
     {
       key: 'description',
       label: t('fields.description'),
+      hiddenOnTablet: true,
       render: agent => (
         <div className="max-w-[200px] truncate">
           {agent.description || t('fields.noDescription')}
@@ -108,6 +109,7 @@ export default function AgentsTable({
       key: 'type',
       label: t('fields.type'),
       sortable: true,
+      hiddenOnMobile: true,
       render: agent => {
         const typeInfo = getAgentTypeInfo(agent.type);
         return <Badge className={cn(typeInfo.color, 'border')}>{typeInfo.label}</Badge>;
@@ -116,6 +118,7 @@ export default function AgentsTable({
     {
       key: 'model',
       label: t('fields.model'),
+      hiddenOnTablet: true,
       render: agent =>
         agent.model ? (
           <Badge variant="outline" className="text-xs">
@@ -129,6 +132,7 @@ export default function AgentsTable({
       key: 'created_at',
       label: t('fields.createdAt'),
       sortable: true,
+      hiddenOnMobile: true,
       render: agent => (
         <span className="text-muted-foreground">
           {agent.created_at && new Date(agent.created_at).toLocaleDateString('pt-BR')}

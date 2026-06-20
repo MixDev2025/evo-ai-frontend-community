@@ -38,7 +38,7 @@ const DashboardTrendsSection = ({ data, t, channelShareData }: DashboardTrendsSe
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-        <div data-tour="dashboard-trends-conversations" className="h-full">
+        <div data-tour="dashboard-trends-conversations" className="h-full min-w-0 overflow-x-auto">
           <AreaChartCard
             title={t('dashboard.charts.visitorsTrend') || 'Conversas por dia'}
             description={t('dashboard.charts.visitorsDescription') || 'Tendência diária de conversas no período'}
@@ -52,7 +52,7 @@ const DashboardTrendsSection = ({ data, t, channelShareData }: DashboardTrendsSe
           />
         </div>
 
-        <div data-tour="dashboard-trends-response" className="h-full">
+        <div data-tour="dashboard-trends-response" className="h-full min-w-0 overflow-x-auto">
           <BarChartCard
             title={t('dashboard.charts.sessionDuration') || 'Tempo de 1ª resposta por dia'}
             description={responseTimeCardDescription}

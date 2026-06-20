@@ -28,6 +28,7 @@ export type {
   TableColumn,
   TableAction
 } from './BaseTable';
+export type { TableColumn as TableColumnType } from './BaseTable';
 
 export type {
   BaseHeaderProps,

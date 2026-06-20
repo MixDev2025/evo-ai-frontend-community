@@ -85,6 +85,7 @@ export default function ContactsTable({
       key: 'type',
       label: t('table.columns.type'),
       sortable: false,
+      hiddenOnMobile: true,
       render: contact => (
         <ContactTypeBadge type={contact.type || 'person'} className="justify-center" />
       ),
@@ -93,12 +94,14 @@ export default function ContactsTable({
       key: 'labels',
       label: t('table.columns.tags'),
       sortable: false,
+      hiddenOnTablet: true,
       render: contact => <ContactTagsList labels={contact.labels} maxVisible={3} size="sm" />,
     },
     {
       key: 'pipelines',
       label: t('table.columns.pipelines'),
       sortable: false,
+      hiddenOnMobile: true,
       render: contact =>
         contact.pipelines && contact.pipelines.length > 0 ? (
           <ContactPipelinesBadge contact={contact} maxPipelines={2} compact={true} />

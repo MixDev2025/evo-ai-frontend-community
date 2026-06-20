@@ -11,10 +11,11 @@ import {
   DialogTitle,
   Button,
 } from '@evoapi/design-system';
+import { Grid3X3, List } from 'lucide-react';
 import { useUserPermissions } from '@/hooks/useUserPermissions';
 import { automationService } from '@/services/automation/automationService';
 import type { AutomationRule } from '@/types/automation';
-import { AutomationsHeader, AutomationsTable, AutomationsPagination } from '@/components/automation';
+import { AutomationsHeader, AutomationsTable, AutomationsPagination, AutomationCard } from '@/components/automation';
 import { DEFAULT_PAGE_SIZE } from '@/constants/pagination';
 
 interface Pagination {
@@ -52,6 +53,7 @@ export default function AutomationsListPage() {
   const { can, isReady: permissionsReady } = useUserPermissions();
 
   const [state, setState] = useState<State>(INITIAL_STATE);
+  const [viewMode, setViewMode] = useState<'cards' | 'table'>('cards');
   const [deleteOpen, setDeleteOpen] = useState(false);
   const [ruleToDelete, setRuleToDelete] = useState<AutomationRule | null>(null);
   const [bulkDeleteOpen, setBulkDeleteOpen] = useState(false);
@@ -227,22 +229,62 @@ export default function AutomationsListPage() {
         canDelete={canDeleteCap}
       />
 
-      <div className="flex-1 overflow-auto mt-6">
-        <AutomationsTable
-          automations={paginatedAutomations}
-          selected={selected}
-          loading={state.loading.list}
-          onSelectionChange={(items) =>
-            setState((prev) => ({ ...prev, selectedIds: items.map((r) => r.id) }))
-          }
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onClone={handleClone}
-          onCreate={handleCreate}
-          canEdit={canUpdate}
-          canDelete={canDeleteCap}
-          canClone={canCloneCap}
-        />
+      {paginatedAutomations.length > 0 && (
+        <div className="flex items-center justify-end mt-4 mb-3">
+          <div className="flex items-center border rounded-lg">
+            <Button
+              variant={viewMode === 'cards' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setViewMode('cards')}
+              className="border-0 rounded-r-none"
+            >
+              <Grid3X3 className="h-4 w-4" />
+            </Button>
+            <Button
+              variant={viewMode === 'table' ? 'default' : 'ghost'}
+              size="sm"
+              onClick={() => setViewMode('table')}
+              className="border-0 rounded-l-none"
+            >
+              <List className="h-4 w-4" />
+            </Button>
+          </div>
+        </div>
+      )}
+
+      <div className="flex-1 overflow-auto mt-2">
+        {viewMode === 'cards' ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {paginatedAutomations.map((rule) => (
+              <AutomationCard
+                key={rule.id}
+                automation={rule}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                onClone={handleClone}
+                canEdit={canUpdate}
+                canDelete={canDeleteCap}
+                canClone={canCloneCap}
+              />
+            ))}
+          </div>
+        ) : (
+          <AutomationsTable
+            automations={paginatedAutomations}
+            selected={selected}
+            loading={state.loading.list}
+            onSelectionChange={(items) =>
+              setState((prev) => ({ ...prev, selectedIds: items.map((r) => r.id) }))
+            }
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+            onClone={handleClone}
+            onCreate={handleCreate}
+            canEdit={canUpdate}
+            canDelete={canDeleteCap}
+            canClone={canCloneCap}
+          />
+        )}
       </div>
 
       {totalFiltered > 0 && (

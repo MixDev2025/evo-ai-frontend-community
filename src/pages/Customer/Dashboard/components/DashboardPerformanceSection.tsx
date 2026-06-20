@@ -53,7 +53,7 @@ const DashboardPerformanceSection = ({ data, t }: DashboardPerformanceSectionPro
       />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-        <Card data-tour="dashboard-csat-distribution">
+        <Card data-tour="dashboard-csat-distribution" className="min-w-0 overflow-x-auto">
           <CardHeader className="pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground flex items-center gap-2">
               {t('dashboard.csat.breakdown') || 'Distribuição de notas'}
@@ -112,15 +112,15 @@ const DashboardPerformanceSection = ({ data, t }: DashboardPerformanceSectionPro
 
                   return (
                     <div key={stage.id || stage.name} className="group">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-3">
-                          <div className={`h-3 w-3 rounded-full ${color}`} />
-                          <span className="font-semibold text-base">{stage.name}</span>
-                          <Badge variant="outline" className="text-xs">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <div className={`h-3 w-3 rounded-full ${color} shrink-0`} />
+                          <span className="font-semibold text-sm sm:text-base truncate">{stage.name}</span>
+                          <Badge variant="outline" className="text-xs shrink-0">
                             {stage.count} {t('dashboard.pipeline.opportunities')}
                           </Badge>
                         </div>
-                        <span className="text-lg font-semibold">{formatCurrency(stage.value)}</span>
+                        <span className="text-base sm:text-lg font-semibold ml-auto sm:ml-0">{formatCurrency(stage.value)}</span>
                       </div>
                       <div className="relative w-full bg-secondary/50 rounded-full h-3 overflow-hidden">
                         <div className={`${color} h-3 rounded-full transition-all duration-500`} style={{ width: `${percentage}%` }} />
@@ -177,15 +177,15 @@ const DashboardPerformanceSection = ({ data, t }: DashboardPerformanceSectionPro
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {data.channels.map(channel => (
-                  <div key={channel.id || channel.name} className="flex items-center justify-between p-3 rounded-md border bg-muted/20">
-                    <div>
-                      <div className="font-semibold">{channel.name}</div>
-                      <div className="text-sm text-muted-foreground">
+                  <div key={channel.id || channel.name} className="flex items-center justify-between p-3 rounded-md border bg-muted/20 gap-2">
+                    <div className="min-w-0 flex-1">
+                      <div className="font-semibold text-sm truncate">{channel.name}</div>
+                      <div className="text-xs text-muted-foreground truncate">
                         {channel.conversations} {t('dashboard.channels.conversations')} ({channel.percentage}%)
                       </div>
                     </div>
-                    <div className="text-right">
-                      <div className="font-bold">{formatCurrency(channel.value)}</div>
+                    <div className="text-right shrink-0">
+                      <div className="font-bold text-sm">{formatCurrency(channel.value)}</div>
                     </div>
                   </div>
                 ))}

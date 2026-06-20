@@ -134,6 +134,7 @@ export default function CampaignsTable({
       key: 'delivery',
       label: t('table.columns.delivery'),
       sortable: false,
+      hiddenOnMobile: true,
       render: campaign => {
         const deliveryRate = campaign.stats?.total_sent
           ? formatPercentage(campaign.stats.total_delivered || 0, campaign.stats.total_sent)
@@ -152,6 +153,7 @@ export default function CampaignsTable({
       key: 'engagement',
       label: t('table.columns.engagement'),
       sortable: false,
+      hiddenOnMobile: true,
       render: campaign => {
         const readRate = campaign.stats?.total_delivered
           ? formatPercentage(campaign.stats.total_read || 0, campaign.stats.total_delivered)

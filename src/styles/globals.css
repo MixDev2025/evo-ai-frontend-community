@@ -212,6 +212,14 @@
 
   body {
     @apply bg-background text-foreground;
+    /* Safe area insets for notched devices (mobile native) */
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    /* Improve touch targets on mobile */
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
   }
 
   #root {
@@ -262,14 +270,22 @@
     scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
   }
 
-  /* Hide scrollbar on mobile but keep functionality */
+  /* Thin scrollbar on mobile - keep functionality visible */
   @media (max-width: 768px) {
     * {
-      scrollbar-width: none;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
     }
 
     ::-webkit-scrollbar {
-      display: none;
+      width: 4px;
+      height: 4px;
+      display: block;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
     }
   }
 }

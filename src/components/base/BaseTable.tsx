@@ -24,6 +24,9 @@ export interface TableColumn<T> {
   width?: string;
   align?: 'left' | 'center' | 'right';
   render?: (item: T, index: number) => ReactNode;
+  hiddenOnMobile?: boolean;
+  hiddenOnTablet?: boolean;
+  visibleOnDesktop?: boolean;
 }
 
 export interface TableAction<T> {
@@ -232,18 +235,25 @@ export default function BaseTable<T extends Record<string, any>>({
                 />
               </TableHead>
             )}
-            {columns.map(column => (
-              <TableHead
-                key={column.key}
-                className={`${column.width} text-sidebar-foreground bg-sidebar-accent/30 font-medium`}
-                align={column.align}
-              >
-                <div className="flex items-center">
-                  {column.label}
-                  {renderSortIcon(column)}
-                </div>
-              </TableHead>
-            ))}
+            {columns.map(column => {
+              const responsiveClass = [
+                column.hiddenOnMobile ? 'hidden md:table-cell' : '',
+                column.hiddenOnTablet ? 'hidden lg:table-cell' : '',
+                column.visibleOnDesktop ? 'hidden lg:table-cell' : '',
+              ].filter(Boolean).join(' ');
+              return (
+                <TableHead
+                  key={column.key}
+                  className={`${column.width || ''} ${responsiveClass} text-sidebar-foreground bg-sidebar-accent/30 font-medium`}
+                  align={column.align}
+                >
+                  <div className="flex items-center">
+                    {column.label}
+                    {renderSortIcon(column)}
+                  </div>
+                </TableHead>
+              );
+            })}
             {actions && actions.length > 0 && (
               <TableHead className="w-12 text-sidebar-foreground bg-sidebar-accent/30">
                 {t('base.table.actions')}
@@ -273,15 +283,22 @@ export default function BaseTable<T extends Record<string, any>>({
                     />
                   </TableCell>
                 )}
-                {columns.map(column => (
-                  <TableCell
-                    key={column.key}
-                    align={column.align}
-                    className="text-sidebar-foreground"
-                  >
-                    {renderCellContent(item, column, index)}
-                  </TableCell>
-                ))}
+                {columns.map(column => {
+                  const responsiveClass = [
+                    column.hiddenOnMobile ? 'hidden md:table-cell' : '',
+                    column.hiddenOnTablet ? 'hidden lg:table-cell' : '',
+                    column.visibleOnDesktop ? 'hidden lg:table-cell' : '',
+                  ].filter(Boolean).join(' ');
+                  return (
+                    <TableCell
+                      key={column.key}
+                      align={column.align}
+                      className={`text-sidebar-foreground ${responsiveClass}`}
+                    >
+                      {renderCellContent(item, column, index)}
+                    </TableCell>
+                  );
+                })}
                 {actions && actions.length > 0 && <TableCell>{renderActions(item)}</TableCell>}
               </TableRow>
             );

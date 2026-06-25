@@ -304,7 +304,7 @@ const ChatHeader = ({
                 <GitBranch className="h-4 w-4" />
                 {pipeline.name}
               </DropdownMenuSubTrigger>
-              <DropdownMenuSubContent>
+              <DropdownMenuSubContent className="max-w-[calc(100vw-2rem)] max-h-[50vh] overflow-y-auto sm:max-w-none sm:max-h-none sm:overflow-visible">
                 {isLoadingConvPipelines ? (
                   <DropdownMenuLabel className="text-xs">{t('pipeline.loading')}</DropdownMenuLabel>
                 ) : (
@@ -498,9 +498,9 @@ const ChatHeader = ({
               <GitBranch className="h-4 w-4" />
               {t('pipeline.addTo')}
             </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent className="w-48">
-              {renderPipelineSubmenuContent()}
-            </DropdownMenuSubContent>
+              <DropdownMenuSubContent className="w-48 max-w-[calc(100vw-2rem)] sm:max-w-none">
+                {renderPipelineSubmenuContent()}
+              </DropdownMenuSubContent>
           </DropdownMenuSub>
 
           <DropdownMenuSeparator />

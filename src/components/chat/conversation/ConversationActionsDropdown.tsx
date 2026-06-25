@@ -180,7 +180,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
           <span className="sr-only">{t('conversationActionsDropdown.srOnly')}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-56 max-w-[calc(100vw-2rem)]">
         <DropdownMenuLabel className="flex items-center gap-2">
           <Settings className="h-4 w-4" />
           {t('conversationActionsDropdown.title')}
@@ -394,7 +394,7 @@ const ConversationActionsDropdown: React.FC<ConversationActionsDropdownProps> = 
                     <GitBranch className="h-4 w-4" />
                     {pipeline.name}
                   </DropdownMenuSubTrigger>
-                  <DropdownMenuSubContent>
+                  <DropdownMenuSubContent className="max-w-[calc(100vw-2rem)] max-h-[50vh] overflow-y-auto sm:max-w-none sm:max-h-none sm:overflow-visible">
                     {isLoadingPipelines ? (
                       <DropdownMenuItem disabled className="text-xs">
                         {t('pipeline.loading')}

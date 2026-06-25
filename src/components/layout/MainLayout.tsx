@@ -106,24 +106,29 @@ export default function MainLayout({ children }: MainLayoutProps) {
     return <div className="flex h-screen items-center justify-center">{t('common.loading')}</div>;
   }
 
+  // Hide system header on mobile when viewing a conversation detail
+  const isChatWithConversation = pathname.startsWith('/conversations/') && pathname !== '/conversations';
+
   return (
     <div className="flex flex-col h-screen bg-background transition-colors duration-150 ease-in-out">
 
-      {/* Header */}
-      <Header
-        user={user}
-        isCollapsed={isCollapsed}
-        isMobileMenuOpen={isMobileMenuOpen}
-        menuItems={menuItems}
-        activeMenu={menuState.activeMenu}
-        pathname={pathname}
-        toggleSidebar={toggleSidebar}
-        setIsMobileMenuOpen={setIsMobileMenuOpen}
-        setLogoutDialogOpen={setLogoutDialogOpen}
-        isMenuItemActive={menuState.isMenuItemActive}
-        isMenuWithSubItemsActive={menuState.isMenuWithSubItemsActive}
-        handleMenuClick={menuState.handleMenuClick}
-      />
+      {/* Header - hidden on mobile when viewing a conversation */}
+      <div className={isChatWithConversation ? 'hidden md:block' : ''}>
+        <Header
+          user={user}
+          isCollapsed={isCollapsed}
+          isMobileMenuOpen={isMobileMenuOpen}
+          menuItems={menuItems}
+          activeMenu={menuState.activeMenu}
+          pathname={pathname}
+          toggleSidebar={toggleSidebar}
+          setIsMobileMenuOpen={setIsMobileMenuOpen}
+          setLogoutDialogOpen={setLogoutDialogOpen}
+          isMenuItemActive={menuState.isMenuItemActive}
+          isMenuWithSubItemsActive={menuState.isMenuWithSubItemsActive}
+          handleMenuClick={menuState.handleMenuClick}
+        />
+      </div>
 
       {/* Main Layout Container — `relative` is the positioning anchor for the collapsed sidebar flyout */}
       <div className="flex flex-1 min-h-0 relative transition-colors duration-150 ease-in-out">

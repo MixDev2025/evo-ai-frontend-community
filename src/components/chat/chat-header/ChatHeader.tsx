@@ -50,7 +50,6 @@ import { findItemInPipeline } from '@/utils/chat/pipelineUtils';
 
 interface ChatHeaderProps {
   conversation: Conversation;
-  onBackClick: () => void;
   onCloseConversation: () => void;
   onContactSidebarOpen: () => void;
   onMarkAsRead: (conversation: Conversation) => void;
@@ -80,7 +79,6 @@ interface ConvPipelineData {
 
 const ChatHeader = ({
   conversation,
-  onBackClick,
   onCloseConversation,
   onContactSidebarOpen,
   onMarkAsRead,
@@ -356,7 +354,7 @@ const ChatHeader = ({
             <MoreVertical className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent align="end" className="w-56">
+        <DropdownMenuContent align="end" className="w-56 max-w-[calc(100vw-2rem)] sm:max-w-none">
           {/* Read/Unread Actions */}
           {hasUnreadMessages ? (
             <DropdownMenuItem
@@ -549,8 +547,8 @@ const ChatHeader = ({
     <div className="flex-shrink-0 p-4 border-b border-border/50 bg-sidebar dark:bg-[#202C33]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          {/* Back button for mobile */}
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={onBackClick}>
+          {/* Back button for mobile — also closes conversation (like X button) */}
+          <Button variant="ghost" size="sm" className="md:hidden" onClick={onCloseConversation}>
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div
@@ -605,12 +603,12 @@ const ChatHeader = ({
           {/* Dropdown de ações da conversa */}
           {renderConversationStatusDropdown()}
 
-          {/* Botão fechar conversa */}
+          {/* Botão fechar conversa — hidden on mobile (back button does this) */}
           <Button
             variant="ghost"
             size="sm"
             onClick={onCloseConversation}
-            className="text-muted-foreground hover:text-foreground"
+            className="hidden md:inline-flex text-muted-foreground hover:text-foreground"
           >
             <X className="h-4 w-4" />
             <span className="sr-only">{t('chatHeader.closeConversation')}</span>

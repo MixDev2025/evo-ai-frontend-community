@@ -801,7 +801,6 @@ const Chat = () => {
               {/* Chat Header */}
               <ChatHeader
                 conversation={selectedConversation}
-                onBackClick={() => setMobileView('list')}
                 onCloseConversation={handleCloseConversation}
                 onContactSidebarOpen={() => setIsContactSidebarOpen(true)}
                 onMarkAsRead={handleMarkAsRead}

@@ -37,6 +37,8 @@ import {
   Archive,
   GitBranch,
   Check,
+  UserPlus,
+  Bookmark,
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useChatContext } from '@/contexts/chat/ChatContext';
@@ -100,6 +102,11 @@ interface ChatSidebarProps {
   onBulkResolve: () => Promise<void>;
   isBulkResolving?: boolean;
   canBulkResolve?: boolean;
+  onBulkArchive?: () => Promise<void>;
+  onBulkAssign?: () => Promise<void>;
+  onBulkLabels?: () => Promise<void>;
+  isBulkArchiving?: boolean;
+  canBulkArchive?: boolean;
 }
 
 const ChatSidebar = ({
@@ -130,6 +137,11 @@ const ChatSidebar = ({
   onBulkResolve,
   isBulkResolving = false,
   canBulkResolve = true,
+  onBulkArchive,
+  onBulkAssign,
+  onBulkLabels,
+  isBulkArchiving = false,
+  canBulkArchive = true,
 }: ChatSidebarProps) => {
   const { t } = useLanguage('chat');
   const chatContext = useChatContext();
@@ -1031,15 +1043,54 @@ const ChatSidebar = ({
               <X className="h-3.5 w-3.5" />
             </Button>
           </div>
-          <Button
-            size="sm"
-            className="h-7 w-full cursor-pointer"
-            onClick={onBulkResolve}
-            disabled={isBulkResolving || !canBulkResolve}
-          >
-            <CheckCircle className="h-3.5 w-3.5 mr-1.5" />
-            {t('chatHeader.actions.markAsResolved')}
-          </Button>
+          <div className="flex items-center gap-1.5">
+            <Button
+              size="sm"
+              variant="secondary"
+              className="h-7 flex-1 cursor-pointer text-xs"
+              onClick={onBulkResolve}
+              disabled={isBulkResolving || !canBulkResolve}
+            >
+              <CheckCircle className="h-3.5 w-3.5 mr-1" />
+              {t('chatHeader.actions.markAsResolved')}
+            </Button>
+            {onBulkArchive && (
+              <Button
+                size="sm"
+                variant="secondary"
+                className="h-7 flex-1 cursor-pointer text-xs"
+                onClick={onBulkArchive}
+                disabled={isBulkArchiving || !canBulkArchive}
+              >
+                <Archive className="h-3.5 w-3.5 mr-1" />
+                {t('chatHeader.actions.archiveConversation')}
+              </Button>
+            )}
+          </div>
+          <div className="flex items-center gap-1.5">
+            {onBulkAssign && (
+              <Button
+                size="sm"
+                variant="secondary"
+                className="h-7 flex-1 cursor-pointer text-xs"
+                onClick={onBulkAssign}
+              >
+                <UserPlus className="h-3.5 w-3.5 mr-1" />
+                {t('chatSidebar.bulkAssign')}
+              </Button>
+            )}
+            {onBulkLabels && (
+              <Button
+                size="sm"
+                variant="secondary"
+                className="h-7 flex-1 cursor-pointer text-xs"
+                onClick={onBulkLabels}
+              >
+                <Bookmark className="h-3.5 w-3.5 mr-1" />
+                {t('chatSidebar.bulkLabels')}
+              </Button>
+            )}
+          </div>
         </div>
       )}
 

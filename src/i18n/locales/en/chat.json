@@ -111,7 +111,9 @@
       "title": "Assign Team Member",
       "description": "Select an Team Member for the conversation with {{name}}",
       "contactFallback": "this contact",
-      "searchPlaceholder": "Search Team Members..."
+      "searchPlaceholder": "Search Team Members...",
+      "bulkTitle": "Assign Team Member",
+      "bulkDescription": "Assign a team member to {{count}} conversation(s)"
     },
     "team": {
       "title": "Assign Team",
@@ -123,7 +125,9 @@
       "title": "Assign Labels",
       "description": "Select labels for the conversation with {{name}}",
       "contactFallback": "this contact",
-      "searchPlaceholder": "Search labels..."
+      "searchPlaceholder": "Search labels...",
+      "bulkTitle": "Assign Labels",
+      "bulkDescription": "Add labels to {{count}} conversation(s)"
     }
   },
   "dashboardApp": {
@@ -295,7 +299,20 @@
       "bulkResolveSuccess": "{{count}} conversation(s) resolved",
       "bulkResolvePartialSuccess": "{{success}} resolved, {{failed}} failed",
       "bulkResolveError": "Error resolving conversations",
-      "bulkResolveNoPermission": "You do not have permission to resolve conversations"
+      "bulkResolveNoPermission": "You do not have permission to resolve conversations",
+      "bulkArchive": "Archive",
+      "bulkArchiveSuccess": "{{count}} conversation(s) archived",
+      "bulkArchivePartialSuccess": "{{success}} archived, {{failed}} failed",
+      "bulkArchiveError": "Error archiving conversations",
+      "bulkArchiveNoPermission": "You do not have permission to archive conversations",
+      "bulkAssignSuccess": "{{count}} conversation(s) assigned",
+      "bulkAssignPartialSuccess": "{{success}} assigned, {{failed}} failed",
+      "bulkAssignError": "Error assigning conversations",
+      "bulkAssignNoPermission": "You do not have permission to assign conversations",
+      "bulkLabelsSuccess": "{{count}} conversation(s) labeled",
+      "bulkLabelsPartialSuccess": "{{success}} labeled, {{failed}} failed",
+      "bulkLabelsError": "Error labeling conversations",
+      "bulkLabelsNoPermission": "You do not have permission to label conversations"
     },
     "contactNoName": "Contact without name",
     "status": "Status:",
@@ -313,6 +330,8 @@
     "filter": "filter",
     "filters": "filters",
     "filtersButton": "Filters",
+    "bulkAssign": "Assign",
+    "bulkLabels": "Labels",
     "view": {
       "active": "Active",
       "archived": "Archived"

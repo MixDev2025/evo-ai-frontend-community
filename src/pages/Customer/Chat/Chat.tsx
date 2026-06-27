@@ -112,6 +112,8 @@ const Chat = () => {
   // Bulk selection state
   const [selectedConversationIds, setSelectedConversationIds] = useState<Set<string>>(new Set());
   const [isBulkResolving, setIsBulkResolving] = useState(false);
+  const [isBulkArchiving, setIsBulkArchiving] = useState(false);
+  const [isBulkAssignmentMode, setIsBulkAssignmentMode] = useState(false);
 
   // Dashboard Apps state (lazy loaded, not auto-fetched)
   const [dashboardApps] = useState<DashboardApp[]>([]);
@@ -246,6 +248,60 @@ const Chat = () => {
       setIsBulkResolving(false);
     }
   }, [selectedConversationIds, can, reloadCurrentFilters, t]);
+
+  const handleBulkArchive = useCallback(async () => {
+    if (selectedConversationIds.size === 0) return;
+    if (!can('conversations', 'update')) {
+      toast.error(t('chatHeader.actions.bulkArchiveNoPermission'));
+      return;
+    }
+    const displayIds = Array.from(selectedConversationIds);
+    setIsBulkArchiving(true);
+    try {
+      const result = await chatService.bulkArchive(displayIds);
+      setSelectedConversationIds(new Set());
+      if (result.failed_ids.length === 0) {
+        toast.success(t('chatHeader.actions.bulkArchiveSuccess', { count: result.success_ids.length }));
+      } else if (result.success_ids.length > 0) {
+        toast.warning(t('chatHeader.actions.bulkArchivePartialSuccess', {
+          success: result.success_ids.length,
+          failed: result.failed_ids.length,
+        }));
+      } else {
+        toast.error(t('chatHeader.actions.bulkArchiveError'));
+      }
+      await reloadCurrentFilters();
+    } catch (error) {
+      console.error('Bulk archive error:', error);
+      toast.error(t('chatHeader.actions.bulkArchiveError'));
+    } finally {
+      setIsBulkArchiving(false);
+    }
+  }, [selectedConversationIds, can, reloadCurrentFilters, t]);
+
+  const handleBulkAssignOpen = useCallback(async () => {
+    if (selectedConversationIds.size === 0) return;
+    if (!can('conversations', 'update')) {
+      toast.error(t('chatHeader.actions.bulkAssignNoPermission'));
+      return;
+    }
+    await assignmentHandlers.loadAssignmentData('agent');
+    setAssignmentType('agent');
+    setIsBulkAssignmentMode(true);
+    setShowAssignmentModal(true);
+  }, [selectedConversationIds, can, assignmentHandlers, t]);
+
+  const handleBulkLabelsOpen = useCallback(async () => {
+    if (selectedConversationIds.size === 0) return;
+    if (!can('conversations', 'update')) {
+      toast.error(t('chatHeader.actions.bulkLabelsNoPermission'));
+      return;
+    }
+    await assignmentHandlers.loadAssignmentData('label');
+    setAssignmentType('label');
+    setIsBulkAssignmentMode(true);
+    setShowAssignmentModal(true);
+  }, [selectedConversationIds, can, assignmentHandlers, t]);
 
   // 🔄 CARREGAMENTO SIMPLES: Apenas carregar mensagens quando conversa muda
   useEffect(() => {
@@ -617,6 +673,48 @@ const Chat = () => {
 
   // Assignment modal handlers
   const handleAssignmentConfirm = async (selectedIds: string[]) => {
+    if (isBulkAssignmentMode) {
+      const displayIds = Array.from(selectedConversationIds);
+      try {
+        if (assignmentType === 'agent') {
+          const result = await chatService.bulkAssign(displayIds, selectedIds[0] || null);
+          if (result.failed_ids.length === 0) {
+            toast.success(t('chatHeader.actions.bulkAssignSuccess', { count: result.success_ids.length }));
+          } else if (result.success_ids.length > 0) {
+            toast.warning(t('chatHeader.actions.bulkAssignPartialSuccess', {
+              success: result.success_ids.length,
+              failed: result.failed_ids.length,
+            }));
+          } else {
+            toast.error(t('chatHeader.actions.bulkAssignError'));
+          }
+        } else if (assignmentType === 'label') {
+          const result = await chatService.bulkAddLabels(displayIds, selectedIds);
+          if (result.failed_ids.length === 0) {
+            toast.success(t('chatHeader.actions.bulkLabelsSuccess', { count: result.success_ids.length }));
+          } else if (result.success_ids.length > 0) {
+            toast.warning(t('chatHeader.actions.bulkLabelsPartialSuccess', {
+              success: result.success_ids.length,
+              failed: result.failed_ids.length,
+            }));
+          } else {
+            toast.error(t('chatHeader.actions.bulkLabelsError'));
+          }
+        }
+        setSelectedConversationIds(new Set());
+        await reloadCurrentFilters();
+      } catch (error) {
+        console.error('Bulk assignment error:', error);
+        toast.error(
+          assignmentType === 'agent'
+            ? t('chatHeader.actions.bulkAssignError')
+            : t('chatHeader.actions.bulkLabelsError'),
+        );
+        throw error;
+      }
+      return;
+    }
+
     if (!conversationToAssign) return;
 
     try {
@@ -634,6 +732,7 @@ const Chat = () => {
   const closeAssignmentModal = () => {
     setShowAssignmentModal(false);
     setConversationToAssign(null);
+    setIsBulkAssignmentMode(false);
   };
 
   // Handle tab change
@@ -718,7 +817,50 @@ const Chat = () => {
     }
   };
 
-  const assignmentModalData = getAssignmentModalData();
+  const getBulkAssignmentModalData = () => {
+    if (!isBulkAssignmentMode) return null;
+
+    switch (assignmentType) {
+      case 'agent':
+        return {
+          title: t('assignment.agent.bulkTitle'),
+          description: t('assignment.agent.bulkDescription', { count: selectedConversationIds.size }),
+          options: assignmentHandlers.users.map(
+            (user): AssignmentOption => ({
+              id: user.id,
+              name: user.name,
+              description: user.email,
+              avatar: user.avatar_url || user.thumbnail,
+            }),
+          ),
+          currentSelection: [],
+          multiSelect: false,
+          searchPlaceholder: t('assignment.agent.searchPlaceholder'),
+        };
+
+      case 'label':
+        return {
+          title: t('assignment.label.bulkTitle'),
+          description: t('assignment.label.bulkDescription', { count: selectedConversationIds.size }),
+          options: assignmentHandlers.labels.map(
+            (label): AssignmentOption => ({
+              id: label.id,
+              name: label.title,
+              description: label.description,
+              color: label.color,
+            }),
+          ),
+          currentSelection: [],
+          multiSelect: true,
+          searchPlaceholder: t('assignment.label.searchPlaceholder'),
+        };
+
+      default:
+        return null;
+    }
+  };
+
+  const assignmentModalData = isBulkAssignmentMode ? getBulkAssignmentModalData() : getAssignmentModalData();
 
   // 🎯 HANDLERS SIMPLIFICADOS: Usar handlers dos hooks customizados
   const handleConversationSelect = (conversation: Conversation) => {
@@ -786,6 +928,11 @@ const Chat = () => {
           onBulkResolve={handleBulkResolve}
           isBulkResolving={isBulkResolving}
           canBulkResolve={can('conversations', 'update')}
+          onBulkArchive={handleBulkArchive}
+          onBulkAssign={handleBulkAssignOpen}
+          onBulkLabels={handleBulkLabelsOpen}
+          isBulkArchiving={isBulkArchiving}
+          canBulkArchive={can('conversations', 'update')}
         />
 
         {/* Chat Area */}

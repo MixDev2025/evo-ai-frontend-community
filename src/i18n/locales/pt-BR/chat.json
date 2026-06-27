@@ -111,7 +111,9 @@
       "title": "Atribuir Atendente",
       "description": "Selecione um atendente para a conversa com {{name}}",
       "contactFallback": "este contato",
-      "searchPlaceholder": "Buscar atendentes..."
+      "searchPlaceholder": "Buscar atendentes...",
+      "bulkTitle": "Atribuir Atendente",
+      "bulkDescription": "Atribuir um atendente a {{count}} conversa(s)"
     },
     "team": {
       "title": "Atribuir Time",
@@ -123,7 +125,9 @@
       "title": "Atribuir Etiquetas",
       "description": "Selecione etiquetas para a conversa com {{name}}",
       "contactFallback": "este contato",
-      "searchPlaceholder": "Buscar etiquetas..."
+      "searchPlaceholder": "Buscar etiquetas...",
+      "bulkTitle": "Atribuir Etiquetas",
+      "bulkDescription": "Adicionar etiquetas a {{count}} conversa(s)"
     }
   },
   "dashboardApp": {
@@ -295,7 +299,19 @@
       "bulkResolveSuccess": "{{count}} conversa(s) resolvida(s)",
       "bulkResolvePartialSuccess": "{{success}} resolvida(s), {{failed}} falhada(s)",
       "bulkResolveError": "Erro ao resolver conversas em lote",
-      "bulkResolveNoPermission": "Você não tem permissão para resolver conversas"
+      "bulkResolveNoPermission": "Você não tem permissão para resolver conversas",
+      "bulkArchiveSuccess": "{{count}} conversa(s) arquivada(s)",
+      "bulkArchivePartialSuccess": "{{success}} arquivada(s), {{failed}} falhada(s)",
+      "bulkArchiveError": "Erro ao arquivar conversas em lote",
+      "bulkArchiveNoPermission": "Você não tem permissão para arquivar conversas",
+      "bulkAssignSuccess": "{{count}} conversa(s) atribuída(s)",
+      "bulkAssignPartialSuccess": "{{success}} atribuída(s), {{failed}} falhada(s)",
+      "bulkAssignError": "Erro ao atribuir conversas em lote",
+      "bulkAssignNoPermission": "Você não tem permissão para atribuir conversas",
+      "bulkLabelsSuccess": "{{count}} conversa(s) etiquetada(s)",
+      "bulkLabelsPartialSuccess": "{{success}} etiquetada(s), {{failed}} falhada(s)",
+      "bulkLabelsError": "Erro ao etiquetar conversas em lote",
+      "bulkLabelsNoPermission": "Você não tem permissão para etiquetar conversas"
     },
     "contactNoName": "Contato sem nome",
     "status": "Status:",
@@ -313,6 +329,8 @@
     "filter": "filtro",
     "filters": "filtros",
     "filtersButton": "Filtros",
+    "bulkAssign": "Atribuir",
+    "bulkLabels": "Etiquetas",
     "view": {
       "active": "Ativas",
       "archived": "Arquivadas"

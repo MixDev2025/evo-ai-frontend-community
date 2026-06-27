@@ -291,6 +291,42 @@ class ChatService {
     const data = response.data?.data;
     return data ?? { success_ids: [], failed_ids: [] };
   }
+
+  async bulkArchive(displayIds: string[]): Promise<{ success_ids: number[]; failed_ids: number[] }> {
+    const response = await api.post('/bulk_actions', {
+      type: 'Conversation',
+      ids: displayIds,
+      fields: { custom_attributes: { archived: true } },
+    });
+    const data = response.data?.data;
+    return data ?? { success_ids: [], failed_ids: [] };
+  }
+
+  async bulkAssign(
+    displayIds: string[],
+    assigneeId: string | null,
+  ): Promise<{ success_ids: number[]; failed_ids: number[] }> {
+    const response = await api.post('/bulk_actions', {
+      type: 'Conversation',
+      ids: displayIds,
+      fields: { assignee_id: assigneeId },
+    });
+    const data = response.data?.data;
+    return data ?? { success_ids: [], failed_ids: [] };
+  }
+
+  async bulkAddLabels(
+    displayIds: string[],
+    labelIds: string[],
+  ): Promise<{ success_ids: number[]; failed_ids: number[] }> {
+    const response = await api.post('/bulk_actions', {
+      type: 'Conversation',
+      ids: displayIds,
+      fields: { label_ids: labelIds },
+    });
+    const data = response.data?.data;
+    return data ?? { success_ids: [], failed_ids: [] };
+  }
 }
 
 // Export singleton instance

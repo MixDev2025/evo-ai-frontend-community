@@ -7,6 +7,7 @@ import { useChatContext } from '@/contexts/chat/ChatContext';
 import { usePermissions } from '@/contexts/PermissionsContext';
 
 import { useLanguage } from '@/hooks/useLanguage';
+import { useUnreadTabTitle } from '@/hooks/useUnreadTabTitle';
 
 // Hooks customizados
 import { useConversationHandlers } from '@/hooks/chat/useConversationHandlers';
@@ -140,6 +141,13 @@ const Chat = () => {
         : null,
     [conversations.state.selectedConversationId],
   );
+
+  const totalUnread = useMemo(
+    () => Object.values(conversations.state.unreadCounts).reduce((sum, c) => sum + c, 0),
+    [conversations.state.unreadCounts],
+  );
+
+  useUnreadTabTitle(totalUnread);
 
   // 🎯 FILTROS: Usar handlers dos hooks customizados (DEFINIR ANTES DOS useEffect)
   const handleApplyFilters = useCallback(

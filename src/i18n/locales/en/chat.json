@@ -330,6 +330,8 @@
     "filter": "filter",
     "filters": "filters",
     "filtersButton": "Filters",
+    "selectAll": "Select all {{count}}",
+    "deselectAll": "Deselect all",
     "bulkAssign": "Assign",
     "bulkLabels": "Labels",
     "view": {

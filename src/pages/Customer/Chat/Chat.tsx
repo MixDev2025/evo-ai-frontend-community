@@ -219,6 +219,23 @@ const Chat = () => {
     setSelectedConversationIds(new Set());
   }, []);
 
+  const handleToggleAllSelection = useCallback((ids: string[]) => {
+    setSelectedConversationIds(prev => {
+      const next = new Set(prev);
+      const allSelected = ids.every(id => next.has(id));
+      if (allSelected) {
+        ids.forEach(id => next.delete(id));
+      } else {
+        ids.forEach(id => {
+          if (next.size < MAX_BULK_SELECTION) {
+            next.add(id);
+          }
+        });
+      }
+      return next;
+    });
+  }, []);
+
   const handleBulkResolve = useCallback(async () => {
     if (selectedConversationIds.size === 0) return;
     if (!can('conversations', 'update')) {
@@ -955,6 +972,7 @@ const Chat = () => {
           selectedConversationIds={selectedConversationIds}
           onToggleSelect={handleToggleConversationSelection}
           onClearSelection={handleClearSelection}
+          onToggleAllSelect={handleToggleAllSelection}
           onBulkResolve={handleBulkResolve}
           isBulkResolving={isBulkResolving}
           canBulkResolve={can('conversations', 'update')}

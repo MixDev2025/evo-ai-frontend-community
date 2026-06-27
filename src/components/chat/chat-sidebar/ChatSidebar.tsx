@@ -99,6 +99,7 @@ interface ChatSidebarProps {
   selectedConversationIds: Set<string>;
   onToggleSelect: (displayId: string) => void;
   onClearSelection: () => void;
+  onToggleAllSelect?: (ids: string[]) => void;
   onBulkResolve: () => Promise<void>;
   isBulkResolving?: boolean;
   canBulkResolve?: boolean;
@@ -135,6 +136,7 @@ const ChatSidebar = ({
   selectedConversationIds,
   onToggleSelect,
   onClearSelection,
+  onToggleAllSelect,
   onBulkResolve,
   isBulkResolving = false,
   canBulkResolve = true,
@@ -1045,6 +1047,28 @@ const ChatSidebar = ({
               <X className="h-3.5 w-3.5" />
             </Button>
           </div>
+          {onToggleAllSelect && visibleConversations.length > 0 && (
+            <div
+              className="flex items-center gap-2 px-1 py-1.5 cursor-pointer select-none"
+              onClick={() => {
+                const ids = visibleConversations.map(c => c.display_id);
+                onToggleAllSelect(ids);
+              }}
+            >
+              <Checkbox
+                checked={
+                  visibleConversations.length > 0 &&
+                  visibleConversations.every(c => selectedConversationIds.has(c.display_id))
+                }
+                className="h-4 w-4 cursor-pointer"
+              />
+              <span className="text-xs text-muted-foreground">
+                {visibleConversations.every(c => selectedConversationIds.has(c.display_id))
+                  ? t('chatSidebar.deselectAll')
+                  : t('chatSidebar.selectAll', { count: visibleConversations.length })}
+              </span>
+            </div>
+          )}
           <div className="grid grid-cols-2 gap-1.5">
             <Button
               size="sm"

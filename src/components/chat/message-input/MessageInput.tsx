@@ -27,6 +27,7 @@ import { useCannedResponses } from '@/hooks/chat/useCannedResponses';
 import { useMessageSignature } from '@/hooks/useMessageSignature';
 import { useLanguage } from '@/hooks/useLanguage';
 import { useAuth } from '@/contexts/AuthContext';
+import { useMessageDrafts } from '@/hooks/useMessageDrafts';
 
 import FileUpload from './FileUpload';
 import FilePreview from './FilePreview';
@@ -132,6 +133,47 @@ const MessageInput: React.FC<MessageInputProps> = ({
   const [cannedResponseQuery, setCannedResponseQuery] = useState('');
   const [selectedCannedIndex, setSelectedCannedIndex] = useState(0);
   const [currentEditorMessage, setCurrentEditorMessage] = useState('');
+
+  // 💾 MESSAGE DRAFTS: Persistir rascunho no localStorage
+  const { saveDraft, loadDraft, clearDraft } = useMessageDrafts();
+  const editorContentRef = useRef('');
+  const prevConvIdRef = useRef(conversationId);
+  const draftTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Manter ref sincronizada com o estado atual
+  useEffect(() => {
+    editorContentRef.current = currentEditorMessage;
+  }, [currentEditorMessage]);
+
+  // Salvar rascunho (com debounce manual)
+  const scheduleDraftSave = useCallback((convId: string | number | undefined, content: string) => {
+    if (draftTimerRef.current) clearTimeout(draftTimerRef.current);
+    draftTimerRef.current = setTimeout(() => {
+      saveDraft(convId, content);
+    }, 800);
+  }, [saveDraft]);
+
+  // Salvar rascunho anterior e carregar novo ao trocar de conversa
+  useEffect(() => {
+    // Cancelar qualquer salvamento pendente ao trocar de conversa
+    if (draftTimerRef.current) clearTimeout(draftTimerRef.current);
+
+    const prevId = prevConvIdRef.current;
+    if (prevId !== undefined && prevId !== null && prevId !== conversationId) {
+      const prevContent = editorContentRef.current;
+      saveDraft(prevId, prevContent);
+    }
+    prevConvIdRef.current = conversationId;
+
+    if (conversationId) {
+      const draft = loadDraft(conversationId);
+      if (draft && richEditorRef.current) {
+        richEditorRef.current.setContent(draft);
+        setCurrentEditorMessage(draft);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [conversationId]);
   const { searchCannedResponses, isLoading: isCannedResponsesLoading } = useCannedResponses({
     enabled: !!inboxId,
   });
@@ -398,6 +440,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
       richEditorRef.current?.clear();
       setCurrentEditorMessage('');
+      clearDraft(conversationId);
       setSelectedFiles([]);
       setUploadProgress({});
 
@@ -743,6 +786,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                   }
                   onChange={content => {
                     setCurrentEditorMessage(content);
+                    scheduleDraftSave(conversationId, content);
                     detectCannedResponseTrigger(content);
                     if (content.trim()) {
                       handleTypingStart();

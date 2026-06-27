@@ -324,6 +324,8 @@
     "filter": "filtro",
     "filters": "filtros",
     "filtersButton": "Filtros",
+    "selectAll": "Seleccionar todas {{count}}",
+    "deselectAll": "Deseleccionar todas",
     "bulkAssign": "Asignar",
     "bulkLabels": "Etiquetas",
     "view": {

@@ -44,6 +44,7 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
     const editorRef = useRef<HTMLDivElement>(null);
     const viewRef = useRef<EditorView | null>(null);
     const [editorState, setEditorState] = useState<EditorState | null>(null);
+    const [hasTextSelection, setHasTextSelection] = useState(false);
 
     const onKeyDownRef = useRef(onKeyDown);
     const onChangeRef = useRef(onChange);
@@ -154,6 +155,9 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
           view.updateState(newState);
           setEditorState(newState);
 
+          const hasSelection = !newState.selection.empty;
+          setHasTextSelection(hasSelection);
+
           if (transaction.docChanged) {
             const doc = newState.doc;
             const content = doc.textContent;
@@ -172,7 +176,7 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
         editable: () => !disabled,
         attributes: {
           class:
-            'prosemirror-editor p-2 sm:p-3 min-h-[1.5em] max-h-[120px] sm:min-h-[100px] sm:max-h-[200px] overflow-y-auto focus:outline-none resize-none text-sm leading-relaxed text-foreground',
+            'prosemirror-editor px-2 py-1 sm:px-3 sm:py-1.5 min-h-[1.5em] max-h-[120px] sm:min-h-[36px] sm:max-h-[200px] overflow-y-auto focus:outline-none resize-none text-sm leading-relaxed text-foreground',
           'data-placeholder': placeholder,
         },
       });
@@ -225,7 +229,7 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
 
     return (
       <div className={className ? `overflow-hidden ${className}` : `border border-border rounded-2xl sm:rounded-lg overflow-hidden bg-background`}>
-        {showToolbar && (
+        {showToolbar && hasTextSelection && (
           <EditorToolbar
             editorState={editorState}
             onAction={handleToolbarAction}

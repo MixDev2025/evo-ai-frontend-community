@@ -1029,7 +1029,7 @@ const ChatSidebar = ({
 
       {/* Bulk Action Toolbar */}
       {selectedConversationIds.size > 0 && (
-        <div className="px-3 py-2 border-b bg-primary/5 flex flex-col gap-1.5 flex-shrink-0">
+        <div className="px-3 py-2.5 border-b bg-primary/5 flex flex-col gap-2 flex-shrink-0">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-muted-foreground">
               {t('chatSidebar.selectedCount', { count: selectedConversationIds.size })}
@@ -1043,50 +1043,48 @@ const ChatSidebar = ({
               <X className="h-3.5 w-3.5" />
             </Button>
           </div>
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <Button
               size="sm"
-              variant="secondary"
-              className="h-7 flex-1 cursor-pointer text-xs"
+              variant="outline"
+              className="h-8 flex-1 cursor-pointer text-xs gap-1"
               onClick={onBulkResolve}
               disabled={isBulkResolving || !canBulkResolve}
             >
-              <CheckCircle className="h-3.5 w-3.5 mr-1" />
+              <CheckCircle className="h-3.5 w-3.5" />
               {t('chatHeader.actions.markAsResolved')}
             </Button>
             {onBulkArchive && (
               <Button
                 size="sm"
-                variant="secondary"
-                className="h-7 flex-1 cursor-pointer text-xs"
+                variant="outline"
+                className="h-8 flex-1 cursor-pointer text-xs gap-1"
                 onClick={onBulkArchive}
                 disabled={isBulkArchiving || !canBulkArchive}
               >
-                <Archive className="h-3.5 w-3.5 mr-1" />
+                <Archive className="h-3.5 w-3.5" />
                 {t('chatHeader.actions.archiveConversation')}
               </Button>
             )}
-          </div>
-          <div className="flex items-center gap-1.5">
             {onBulkAssign && (
               <Button
                 size="sm"
-                variant="secondary"
-                className="h-7 flex-1 cursor-pointer text-xs"
+                variant="outline"
+                className="h-8 flex-1 cursor-pointer text-xs gap-1"
                 onClick={onBulkAssign}
               >
-                <UserPlus className="h-3.5 w-3.5 mr-1" />
+                <UserPlus className="h-3.5 w-3.5" />
                 {t('chatSidebar.bulkAssign')}
               </Button>
             )}
             {onBulkLabels && (
               <Button
                 size="sm"
-                variant="secondary"
-                className="h-7 flex-1 cursor-pointer text-xs"
+                variant="outline"
+                className="h-8 flex-1 cursor-pointer text-xs gap-1"
                 onClick={onBulkLabels}
               >
-                <Bookmark className="h-3.5 w-3.5 mr-1" />
+                <Bookmark className="h-3.5 w-3.5" />
                 {t('chatSidebar.bulkLabels')}
               </Button>
             )}

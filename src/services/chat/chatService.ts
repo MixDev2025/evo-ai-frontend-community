@@ -293,13 +293,19 @@ class ChatService {
   }
 
   async bulkArchive(displayIds: string[]): Promise<{ success_ids: number[]; failed_ids: number[] }> {
-    const response = await api.post('/bulk_actions', {
-      type: 'Conversation',
-      ids: displayIds,
-      fields: { custom_attributes: { archived: true } },
+    const results = await Promise.allSettled(
+      displayIds.map(id => this.archiveConversation(id)),
+    );
+    const success_ids: number[] = [];
+    const failed_ids: number[] = [];
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        success_ids.push(Number(displayIds[index]));
+      } else {
+        failed_ids.push(Number(displayIds[index]));
+      }
     });
-    const data = response.data?.data;
-    return data ?? { success_ids: [], failed_ids: [] };
+    return { success_ids, failed_ids };
   }
 
   async bulkAssign(
@@ -319,13 +325,19 @@ class ChatService {
     displayIds: string[],
     labelIds: string[],
   ): Promise<{ success_ids: number[]; failed_ids: number[] }> {
-    const response = await api.post('/bulk_actions', {
-      type: 'Conversation',
-      ids: displayIds,
-      fields: { label_ids: labelIds },
+    const results = await Promise.allSettled(
+      displayIds.map(id => this.addLabels(id, labelIds)),
+    );
+    const success_ids: number[] = [];
+    const failed_ids: number[] = [];
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        success_ids.push(Number(displayIds[index]));
+      } else {
+        failed_ids.push(Number(displayIds[index]));
+      }
     });
-    const data = response.data?.data;
-    return data ?? { success_ids: [], failed_ids: [] };
+    return { success_ids, failed_ids };
   }
 }
 

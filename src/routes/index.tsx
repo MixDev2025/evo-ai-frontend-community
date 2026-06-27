@@ -7,6 +7,7 @@ import SmartRedirect from './SmartRedirect';
 import RouterGuard from '@/guards/RouterGuard';
 import PermissionRoute from './PermissionRoute';
 import { PluginRoutes, type PluginRoute as PluginRouteType } from '@/plugin-host';
+import { PageLoader } from '@/components/loading-states/PageLoader';
 
 import MainLayout from '@/components/layout/MainLayout';
 
@@ -120,9 +121,7 @@ const ChatRouteElement = (
     <CustomerRoute>
       <MainLayout>
         <PermissionRoute resource="conversations" action="read">
-          <Suspense
-            fallback={<div className="flex items-center justify-center h-full">Carregando...</div>}
-          >
+          <Suspense fallback={<PageLoader message="Carregando conversas..." />}>
             <ChatPage />
           </Suspense>
         </PermissionRoute>

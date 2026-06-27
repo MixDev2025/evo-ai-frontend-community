@@ -132,6 +132,7 @@ const ContactAvatar: React.FC<ContactAvatarProps> = ({
           <AvatarImage
             src={avatarUrl}
             alt={contact?.name || t('contactAvatar.avatarAlt')}
+            loading="lazy"
             onError={() => {
               console.warn(`Failed to load avatar for contact ${contact?.name}:`, avatarUrl);
               setImageError(true);

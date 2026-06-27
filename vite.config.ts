@@ -28,12 +28,28 @@ export default defineConfig({
     tailwindcss(),
   ],
   build: {
-    // Reduce chunking to minimize requests via ngrok
     rollupOptions: {
       output: {
-        manualChunks: undefined, // Disable auto chunking
+        manualChunks: {
+          // Vendor chunking - separar bibliotecas pesadas
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-prosemirror': [
+            'prosemirror-state',
+            'prosemirror-view',
+            'prosemirror-model',
+            'prosemirror-commands',
+            'prosemirror-keymap',
+            'prosemirror-history',
+            'prosemirror-schema-list',
+            'prosemirror-schema-basic',
+          ],
+          'vendor-ui': ['@evoapi/design-system', 'lucide-react', 'class-variance-authority', 'clsx'],
+          'vendor-chat': ['emoji-picker-react', 'date-fns'],
+        },
       },
     },
+    // Aumentar limites de warning
+    chunkSizeWarningLimit: 1000,
   },
   resolve: {
     alias: {

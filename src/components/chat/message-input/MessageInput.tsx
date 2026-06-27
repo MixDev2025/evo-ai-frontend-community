@@ -31,12 +31,12 @@ import { useMessageDrafts } from '@/hooks/useMessageDrafts';
 
 import FileUpload from './FileUpload';
 import FilePreview from './FilePreview';
-import EmojiPicker from './EmojiPicker';
+const EmojiPicker = React.lazy(() => import('./EmojiPicker'));
 import ReplyModeToggle from '../ReplyModeToggle';
 import AudioRecorder from '../audio';
 
 import { AIAssistanceButton } from '../ai-assistance';
-import { CannedResponsesList } from '../canned-responses';
+const CannedResponsesList = React.lazy(() => import('../canned-responses').then(m => ({ default: m.CannedResponsesList })));
 import { RichTextEditor, RichTextEditorRef } from '../rich-text-editor';
 
 import { ReplyMode, Message } from '@/types/chat/api';
@@ -691,13 +691,15 @@ const MessageInput: React.FC<MessageInputProps> = ({
         <CardContent className="p-2 sm:p-2 relative">
           {/* 🎯 CANNED RESPONSES: Dropdown de sugestões */}
           {showCannedResponses && (
-            <CannedResponsesList
-              cannedResponses={filteredCannedResponses}
-              selectedIndex={selectedCannedIndex}
-              searchQuery={cannedResponseQuery}
-              isLoading={isCannedResponsesLoading}
-              onSelect={handleSelectCannedResponse}
-            />
+            <React.Suspense fallback={null}>
+              <CannedResponsesList
+                cannedResponses={filteredCannedResponses}
+                selectedIndex={selectedCannedIndex}
+                searchQuery={cannedResponseQuery}
+                isLoading={isCannedResponsesLoading}
+                onSelect={handleSelectCannedResponse}
+              />
+            </React.Suspense>
           )}
 
           {/* Primeira linha: Reply Mode Toggle + Botões de ação rápida */}
@@ -774,11 +776,13 @@ const MessageInput: React.FC<MessageInputProps> = ({
                   >
                     <Smile className="h-6 w-6 sm:h-4 sm:w-4" />
                   </Button>
-                  <EmojiPicker
-                    isOpen={showEmojiPicker}
-                    onEmojiSelect={handleEmojiSelect}
-                    onClose={() => setShowEmojiPicker(false)}
-                  />
+                  <React.Suspense fallback={null}>
+                    <EmojiPicker
+                      isOpen={showEmojiPicker}
+                      onEmojiSelect={handleEmojiSelect}
+                      onClose={() => setShowEmojiPicker(false)}
+                    />
+                  </React.Suspense>
                 </div>
               </div>
 

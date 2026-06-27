@@ -700,6 +700,19 @@ function useChatIntegration() {
     saveState,
   ]);
 
+  useEffect(() => {
+    const total = Object.values(conversations.state.unreadCounts).reduce(
+      (sum, c) => sum + c,
+      0,
+    );
+
+    if (total > 0) {
+      document.title = `(${total}) ChatMix`;
+    } else {
+      document.title = 'ChatMix';
+    }
+  }, [conversations.state.unreadCounts]);
+
   return {
     messages,
     conversations,

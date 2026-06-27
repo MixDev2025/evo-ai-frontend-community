@@ -198,6 +198,18 @@ export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>
       }
     }, [disabled]);
 
+    useEffect(() => {
+      if (viewRef.current) {
+        viewRef.current.setProps({
+          attributes: {
+            class:
+              'prosemirror-editor px-2 py-1 sm:px-3 sm:py-1.5 min-h-[1.5em] max-h-[120px] sm:min-h-[36px] sm:max-h-[200px] overflow-y-auto focus:outline-none resize-none text-sm leading-relaxed text-foreground',
+            'data-placeholder': placeholder,
+          },
+        });
+      }
+    }, [placeholder]);
+
     const handleToolbarAction = (action: string) => {
       if (!viewRef.current || !editorState) return;
 

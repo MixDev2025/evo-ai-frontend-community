@@ -308,6 +308,22 @@ class ChatService {
     return { success_ids, failed_ids };
   }
 
+  async bulkUnarchive(displayIds: string[]): Promise<{ success_ids: number[]; failed_ids: number[] }> {
+    const results = await Promise.allSettled(
+      displayIds.map(id => this.unarchiveConversation(id)),
+    );
+    const success_ids: number[] = [];
+    const failed_ids: number[] = [];
+    results.forEach((result, index) => {
+      if (result.status === 'fulfilled') {
+        success_ids.push(Number(displayIds[index]));
+      } else {
+        failed_ids.push(Number(displayIds[index]));
+      }
+    });
+    return { success_ids, failed_ids };
+  }
+
   async bulkAssign(
     displayIds: string[],
     assigneeId: string | null,

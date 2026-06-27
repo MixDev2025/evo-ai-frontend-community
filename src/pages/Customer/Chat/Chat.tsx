@@ -279,6 +279,36 @@ const Chat = () => {
     }
   }, [selectedConversationIds, can, reloadCurrentFilters, t]);
 
+  const handleBulkUnarchive = useCallback(async () => {
+    if (selectedConversationIds.size === 0) return;
+    if (!can('conversations', 'update')) {
+      toast.error(t('chatHeader.actions.bulkArchiveNoPermission'));
+      return;
+    }
+    const displayIds = Array.from(selectedConversationIds);
+    setIsBulkArchiving(true);
+    try {
+      const result = await chatService.bulkUnarchive(displayIds);
+      setSelectedConversationIds(new Set());
+      if (result.failed_ids.length === 0) {
+        toast.success(t('chatHeader.actions.bulkArchiveSuccess', { count: result.success_ids.length }));
+      } else if (result.success_ids.length > 0) {
+        toast.warning(t('chatHeader.actions.bulkArchivePartialSuccess', {
+          success: result.success_ids.length,
+          failed: result.failed_ids.length,
+        }));
+      } else {
+        toast.error(t('chatHeader.actions.bulkArchiveError'));
+      }
+      await reloadCurrentFilters();
+    } catch (error) {
+      console.error('Bulk unarchive error:', error);
+      toast.error(t('chatHeader.actions.bulkArchiveError'));
+    } finally {
+      setIsBulkArchiving(false);
+    }
+  }, [selectedConversationIds, can, reloadCurrentFilters, t]);
+
   const handleBulkAssignOpen = useCallback(async () => {
     if (selectedConversationIds.size === 0) return;
     if (!can('conversations', 'update')) {
@@ -929,6 +959,7 @@ const Chat = () => {
           isBulkResolving={isBulkResolving}
           canBulkResolve={can('conversations', 'update')}
           onBulkArchive={handleBulkArchive}
+          onBulkUnarchive={handleBulkUnarchive}
           onBulkAssign={handleBulkAssignOpen}
           onBulkLabels={handleBulkLabelsOpen}
           isBulkArchiving={isBulkArchiving}

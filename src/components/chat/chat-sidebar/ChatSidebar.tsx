@@ -103,6 +103,7 @@ interface ChatSidebarProps {
   isBulkResolving?: boolean;
   canBulkResolve?: boolean;
   onBulkArchive?: () => Promise<void>;
+  onBulkUnarchive?: () => Promise<void>;
   onBulkAssign?: () => Promise<void>;
   onBulkLabels?: () => Promise<void>;
   isBulkArchiving?: boolean;
@@ -138,6 +139,7 @@ const ChatSidebar = ({
   isBulkResolving = false,
   canBulkResolve = true,
   onBulkArchive,
+  onBulkUnarchive,
   onBulkAssign,
   onBulkLabels,
   isBulkArchiving = false,
@@ -1054,16 +1056,18 @@ const ChatSidebar = ({
               <CheckCircle className="h-3.5 w-3.5 shrink-0" />
               {t('chatHeader.actions.markAsResolved')}
             </Button>
-            {onBulkArchive && (
+            {(showArchived ? onBulkUnarchive : onBulkArchive) && (
               <Button
                 size="sm"
                 variant="outline"
                 className="h-8 cursor-pointer text-xs gap-1"
-                onClick={onBulkArchive}
+                onClick={showArchived ? onBulkUnarchive : onBulkArchive}
                 disabled={isBulkArchiving || !canBulkArchive}
               >
                 <Archive className="h-3.5 w-3.5 shrink-0" />
-                {t('chatHeader.actions.archiveConversation')}
+                {showArchived
+                  ? t('chatHeader.actions.unarchiveConversation')
+                  : t('chatHeader.actions.archiveConversation')}
               </Button>
             )}
             {onBulkAssign && (

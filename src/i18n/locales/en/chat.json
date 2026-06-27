@@ -731,6 +731,7 @@
     },
     "placeholders": {
       "default": "Type your message... (type / for canned responses)",
+      "mobileDefault": "Type your message...",
       "pendingNote": "Type your private note (pending conversation)...",
       "privateNote": "Type your private note... (type / for canned responses)"
     }

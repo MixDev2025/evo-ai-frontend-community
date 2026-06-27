@@ -557,32 +557,44 @@ const ChatHeader = ({
           >
             <ContactAvatar contact={conversation.contact} />
           </div>
-          <div>
+          <div className="min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="font-semibold">
                 {conversation.contact?.name || t('chatHeader.contactNoName')}
               </h3>
+            </div>
+            {/* Mobile: Phone + Status on same line */}
+            {phoneDisplay && (
+              <div className="text-sm text-muted-foreground md:hidden">
+                {phoneDisplay} — {getStatusLabel(conversation.status)}
+              </div>
+            )}
+            {/* Desktop: Phone and Status on separate line */}
+            <div className="hidden md:flex items-center gap-2 text-sm text-muted-foreground">
               {phoneDisplay && (
                 <span
-                  className="text-sm text-muted-foreground"
                   title={t('chatHeader.phoneNumber')}
                   aria-label={`${t('chatHeader.phoneNumber')}: ${phoneDisplay}`}
                 >
                   {phoneDisplay}
                 </span>
               )}
-            </div>
-            <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              {inboxName && (
-                <>
-                  <span>{inboxName}</span>
-                  <span>•</span>
-                </>
-              )}
+              {phoneDisplay && <span>•</span>}
               <span>
                 {t('chatHeader.status')} {getStatusLabel(conversation.status)}
               </span>
             </div>
+            {/* Account Name - Green badge */}
+            {inboxName && (
+              <div className="mt-1 truncate">
+                <span
+                  className="inline-block px-2 py-0.5 text-xs font-medium rounded-md truncate max-w-full border border-green-500/50 bg-green-500/80 text-white"
+                  title={inboxName}
+                >
+                  {inboxName}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         {/* Ações do chat */}

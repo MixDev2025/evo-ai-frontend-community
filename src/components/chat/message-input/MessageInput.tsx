@@ -121,6 +121,15 @@ const MessageInput: React.FC<MessageInputProps> = ({
   // 🎯 EMOJI PICKER: Estado
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
+  // 📱 MOBILE DETECTION: Detectar viewport mobile
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // 🎯 MESSAGE SIGNATURE: Hook para gerenciar assinatura
   const { isSignatureEnabled, toggleSignature, hasSignature, appendSignatureIfEnabled } =
     useMessageSignature();
@@ -692,7 +701,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           )}
 
           {/* Primeira linha: Reply Mode Toggle + Botões de ação rápida */}
-          <div className="flex flex-wrap items-center justify-between mb-1 sm:mb-1 gap-1.5 sm:gap-2">
+          <div className="flex items-center justify-between mb-1 sm:mb-1 gap-1.5 sm:gap-2">
             {/* Reply Mode Toggle */}
             <ReplyModeToggle
               currentMode={isPendingConversation ? ReplyMode.NOTE : replyMode}
@@ -782,7 +791,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
                       ? t('messageInput.placeholders.pendingNote')
                       : replyMode === ReplyMode.NOTE
                         ? t('messageInput.placeholders.privateNote')
-                        : t('messageInput.placeholders.default')
+                        : isMobile
+                          ? t('messageInput.placeholders.mobileDefault')
+                          : t('messageInput.placeholders.default')
                   }
                   onChange={content => {
                     setCurrentEditorMessage(content);

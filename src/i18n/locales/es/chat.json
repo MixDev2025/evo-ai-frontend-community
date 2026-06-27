@@ -698,6 +698,7 @@
     },
     "placeholders": {
       "default": "Escribe tu mensaje... (escribe / para respuestas rápidas)",
+      "mobileDefault": "Escribe tu mensaje...",
       "pendingNote": "Escribe tu nota privada (conversación pendiente)...",
       "privateNote": "Escribe tu nota privada... (escribe / para respuestas rápidas)"
     }

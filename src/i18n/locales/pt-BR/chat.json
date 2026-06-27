@@ -733,6 +733,7 @@
     },
     "placeholders": {
       "default": "Digite sua mensagem... (digite / para respostas prontas)",
+      "mobileDefault": "Digite sua mensagem...",
       "pendingNote": "Digite sua nota privada (conversa pendente)...",
       "privateNote": "Digite sua nota privada... (digite / para respostas prontas)"
     }

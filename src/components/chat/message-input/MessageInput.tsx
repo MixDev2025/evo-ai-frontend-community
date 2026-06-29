@@ -794,7 +794,9 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     isPendingConversation
                       ? t('messageInput.placeholders.pendingNote')
                       : replyMode === ReplyMode.NOTE
-                        ? t('messageInput.placeholders.privateNote')
+                        ? isMobile
+                          ? t('messageInput.placeholders.mobilePrivateNote')
+                          : t('messageInput.placeholders.privateNote')
                         : isMobile
                           ? t('messageInput.placeholders.mobileDefault')
                           : t('messageInput.placeholders.default')

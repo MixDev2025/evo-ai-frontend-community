@@ -307,7 +307,7 @@ const ChatArea = ({
   const typingUsers = websocket.getTypingUsers(selectedConversationId);
 
   return (
-    <div className="flex-1 flex flex-col overflow-hidden min-h-0 bg-[#E5DDD5] dark:bg-[#0B141A]">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#E5DDD5] dark:bg-[#0B141A] h-full">
       {/* 🎯 MESSAGING WINDOW RESTRICTIONS: Banner de aviso (WhatsApp, Instagram, Messenger) */}
       {/* Posicionado no topo, logo após o header, para máxima visibilidade */}
       {shouldShowRestrictionBanner && (
@@ -381,7 +381,7 @@ const ChatArea = ({
       <TypingIndicator typingUsers={typingUsers} />
 
       {/* Message Input - Fixo na parte inferior */}
-      <div className="flex-shrink-0 w-full">
+      <div className="flex-shrink-0 w-full border-t border-border bg-background">
         <MessageInput
           onSendMessage={handleSendMessage}
           placeholder={

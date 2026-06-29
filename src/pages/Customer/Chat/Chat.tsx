@@ -377,13 +377,13 @@ const Chat = () => {
       if (window.innerWidth < 768 && mobileView === 'chat') {
         setMobileView('list');
         conversations.selectConversation(null);
-        navigate('/conversations', { replace: true });
+        window.history.replaceState(null, '', '/conversations');
       }
     };
 
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, [mobileView, conversations, navigate]);
+  }, [mobileView, conversations]);
 
   // Sincronizar conversa selecionada com URL com debounce
   useEffect(() => {
@@ -566,11 +566,11 @@ const Chat = () => {
     await conversations.selectConversation(null);
     setMobileView('list');
     setIsContactSidebarOpen(false);
-    navigate('/conversations', { replace: true });
+    window.history.replaceState(null, '', '/conversations');
     setTimeout(() => {
       isManualNavigationRef.current = false;
     }, 100);
-  }, [conversations, navigate]);
+  }, [conversations]);
 
   const handleMarkAsResolved = useCallback(
     async (conversation: Conversation) => {
@@ -944,8 +944,12 @@ const Chat = () => {
     conversations.selectConversation(conversationIdStr);
     // Switch to chat view on mobile when conversation is selected
     setMobileView('chat');
-    // Atualizar URL para incluir o ID da conversa
-    navigate(`/conversations/${conversationIdStr}`, { replace: true });
+
+    // 📱 MOBILE: Push history entry for back button support
+    const newUrl = `/conversations/${conversationIdStr}`;
+    if (window.location.pathname !== newUrl) {
+      window.history.pushState({ conversationId: conversationIdStr }, '', newUrl);
+    }
 
     // 🔒 RESET flag após navegação
     setTimeout(() => {

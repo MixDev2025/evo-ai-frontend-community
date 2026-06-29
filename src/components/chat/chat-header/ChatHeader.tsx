@@ -547,8 +547,16 @@ const ChatHeader = ({
     <div className="flex-shrink-0 p-4 border-b border-border/50 bg-sidebar dark:bg-[#202C33]">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          {/* Back button for mobile — also closes conversation (like X button) */}
-          <Button variant="ghost" size="sm" className="md:hidden" onClick={onCloseConversation}>
+          {/* Back button for mobile — switches to list view */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="md:hidden"
+            onClick={(e) => {
+              e.preventDefault();
+              onCloseConversation();
+            }}
+          >
             <ArrowLeft className="h-4 w-4" />
           </Button>
           <div

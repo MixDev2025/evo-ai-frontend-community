@@ -977,7 +977,13 @@ const ChatSidebar = ({
             size="sm"
             className="h-8 cursor-pointer"
             aria-pressed={!showArchived}
-            onClick={() => setShowArchived(false)}
+            onClick={() => {
+              setShowArchived(false);
+              // Reload conversations with open status filter
+              if (filters.state.activeFilters.length === 0) {
+                onFilterApply([]);
+              }
+            }}
           >
             {t('chatSidebar.view.active')}
           </Button>
@@ -987,7 +993,13 @@ const ChatSidebar = ({
             size="sm"
             className="h-8 cursor-pointer"
             aria-pressed={showArchived}
-            onClick={() => setShowArchived(true)}
+            onClick={() => {
+              setShowArchived(true);
+              // Reload conversations with archived status filter
+              if (filters.state.activeFilters.length === 0) {
+                onFilterApply([]);
+              }
+            }}
           >
             {t('chatSidebar.view.archived')}
           </Button>
@@ -1182,7 +1194,7 @@ const ChatSidebar = ({
                 conversation,
                 <div
                   key={conversation.id}
-                  className={`px-4 py-2.5 hover:bg-[#F0F2F5] dark:hover:bg-[#2A3942] cursor-pointer transition-colors ${
+                  className={`px-3 sm:px-4 py-2 sm:py-2.5 hover:bg-[#F0F2F5] dark:hover:bg-[#2A3942] cursor-pointer transition-colors ${
                     isSelected
                       ? 'bg-[#F0F2F5] dark:bg-[#2A3942] border-l-[3px] border-l-[#00A884] dark:border-l-[#00A884]'
                       : ''
@@ -1190,7 +1202,7 @@ const ChatSidebar = ({
                   onClick={() => onConversationSelect(conversation)}
                 >
                   <div className="flex items-start justify-between">
-                    <div className="flex items-start gap-3 min-w-0 flex-1">
+                    <div className="flex items-start gap-2 sm:gap-3 min-w-0 flex-1">
                       <div
                         className="mt-1 flex-shrink-0"
                         onClick={e => e.stopPropagation()}
@@ -1198,24 +1210,33 @@ const ChatSidebar = ({
                         <Checkbox
                           checked={selectedConversationIds.has(String(conversation.display_id))}
                           onCheckedChange={(checked: boolean | 'indeterminate') => {
-                            const isSelected = selectedConversationIds.has(String(conversation.display_id));
-                            if ((checked === true && !isSelected) || (checked === false && isSelected)) {
-                              onToggleSelect(String(conversation.display_id));
-                            }
+                            // Only handle user-initiated changes, not programmatic ones
+                            if (checked === 'indeterminate') return;
+                            onToggleSelect(String(conversation.display_id));
                           }}
                           aria-label={t('chatSidebar.selectConversation')}
                           className="bg-white dark:bg-zinc-700 border-2 border-zinc-400 dark:border-zinc-500 data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                         />
+                       </div>
+                      <div className="sm:hidden">
+                        <ContactAvatar
+                          contact={conversation.contact}
+                          channelType={channelType}
+                          channelProvider={channelProvider}
+                          size="sm"
+                        />
                       </div>
-                      <ContactAvatar
-                        contact={conversation.contact}
-                        channelType={channelType}
-                        channelProvider={channelProvider}
-                      />
+                      <div className="hidden sm:block">
+                        <ContactAvatar
+                          contact={conversation.contact}
+                          channelType={channelType}
+                          channelProvider={channelProvider}
+                        />
+                      </div>
                       <div className="min-w-0 flex-1">
-                        <div className="flex items-center justify-between mb-1">
-                          <div className="flex items-center gap-2 min-w-0 flex-1">
-                            <p className="font-medium truncate">
+                        <div className="flex items-center justify-between mb-0.5 sm:mb-1">
+                          <div className="flex items-center gap-1.5 sm:gap-2 min-w-0 flex-1">
+                            <p className="font-medium truncate text-sm sm:text-base">
                               {conversation.contact?.name || t('chatSidebar.contactNoName')}
                             </p>
                             {Boolean(conversation.custom_attributes?.pinned) && (

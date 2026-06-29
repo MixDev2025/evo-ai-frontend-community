@@ -370,6 +370,21 @@ const Chat = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [conversations.state.selectedConversationId]); // Removido 'messages' para evitar loop
 
+  // 📱 MOBILE BACK BUTTON: Handle browser back button on mobile
+  useEffect(() => {
+    const handlePopState = () => {
+      // On mobile, if we're in chat view, switch to list view
+      if (window.innerWidth < 768 && mobileView === 'chat') {
+        setMobileView('list');
+        conversations.selectConversation(null);
+        navigate('/conversations', { replace: true });
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [mobileView, conversations, navigate]);
+
   // Sincronizar conversa selecionada com URL com debounce
   useEffect(() => {
     // 🔒 PROTEÇÃO: Ignorar URL sync durante navegação manual

@@ -20,6 +20,8 @@ import {
 } from 'lucide-react';
 import { Message } from '@/types/chat/api';
 import { formatMessageTime } from '@/utils/time/timeHelpers';
+import { useLanguage } from '@/hooks/useLanguage';
+import { translateActivityMessage } from '@/utils/chat/translateActivityMessage';
 
 interface SystemMessageProps {
   message: Message;
@@ -132,7 +134,11 @@ const getSystemMessageIcon = (content: string) => {
 };
 
 const SystemMessage: React.FC<SystemMessageProps> = ({ message, labels = [] }) => {
+  const { t } = useLanguage('chat');
   const IconComponent = getSystemMessageIcon(message.content);
+
+  // Traduzir mensagem de atividade
+  const translatedContent = translateActivityMessage(message.content, t);
 
   // Formatação do timestamp - usando a mesma função das mensagens normais
   const timestamp = formatMessageTime(message.created_at);
@@ -159,7 +165,7 @@ const SystemMessage: React.FC<SystemMessageProps> = ({ message, labels = [] }) =
   // Se tem labels, renderizar com badges
   if (mentionedLabels.length > 0) {
     // Remover IDs do texto para melhor legibilidade
-    let cleanContent = message.content;
+    let cleanContent = translatedContent;
     mentionedLabelIds.forEach(id => {
       cleanContent = cleanContent.replace(id, '').replace(/\s+/g, ' ').trim();
     });
@@ -199,7 +205,7 @@ const SystemMessage: React.FC<SystemMessageProps> = ({ message, labels = [] }) =
           className="w-3 h-3 text-muted-foreground/70 flex-shrink-0"
           aria-hidden="true"
         />
-        <span className="font-medium">{message.content}</span>
+        <span className="font-medium">{translatedContent}</span>
         <span className="text-muted-foreground/60 text-xs ml-1 hidden sm:inline">{timestamp}</span>
       </div>
     </div>

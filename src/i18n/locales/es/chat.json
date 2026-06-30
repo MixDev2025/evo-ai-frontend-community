@@ -976,5 +976,21 @@
       "contactsEmpty": "No se encontraron contactos",
       "messagesEmpty": "No se encontraron mensajes"
     }
+  },
+  "activityMessages": {
+    "selfAssigned": "{{name}} se asignó esta conversación",
+    "assignedToBy": "Conversa asignada a {{name}} por {{assigner}}",
+    "assignedTo": "Conversa asignada a {{name}}",
+    "unassignedBy": "Conversa desasignada por {{name}}",
+    "resolvedBy": "Conversa marcada como resuelta por {{name}}",
+    "pendingBy": "Conversa marcada como pendiente por {{name}}",
+    "reopenedBy": "Conversa reabierta por {{name}}",
+    "labelAdded": "{{name}} agregó {{label}}",
+    "labelRemoved": "{{name}} eliminó {{label}}",
+    "priorityChanged": "Prioridad cambiada a {{priority}} por {{name}}",
+    "joined": "{{name}} se unió a la conversa",
+    "left": "{{name}} salió de la conversa",
+    "teamAssigned": "Equipo {{name}} asignado a la conversa",
+    "teamRemoved": "Equipo {{name}} removido de la conversa"
   }
 }

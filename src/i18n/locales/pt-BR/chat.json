@@ -1010,6 +1010,22 @@
       "messagesEmpty": "Nenhuma mensagem encontrada"
     }
   },
+  "activityMessages": {
+    "selfAssigned": "{{name}} atribuiu a si mesmo esta conversa",
+    "assignedToBy": "Conversa atribuída a {{name}} por {{assigner}}",
+    "assignedTo": "Conversa atribuída a {{name}}",
+    "unassignedBy": "Conversa desatribuída por {{name}}",
+    "resolvedBy": "Conversa marcada como resolvida por {{name}}",
+    "pendingBy": "Conversa marcada como pendente por {{name}}",
+    "reopenedBy": "Conversa reaberta por {{name}}",
+    "labelAdded": "{{name}} adicionou {{label}}",
+    "labelRemoved": "{{name}} removeu {{label}}",
+    "priorityChanged": "Prioridade alterada para {{priority}} por {{name}}",
+    "joined": "{{name}} entrou na conversa",
+    "left": "{{name}} saiu da conversa",
+    "teamAssigned": "Time {{name}} atribuído à conversa",
+    "teamRemoved": "Time {{name}} removido da conversa"
+  },
   "pipeline": {
     "section": "Pipeline",
     "addTo": "Adicionar ao pipeline",

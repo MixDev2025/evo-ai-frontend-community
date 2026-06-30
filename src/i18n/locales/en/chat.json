@@ -1008,6 +1008,22 @@
       "messagesEmpty": "No messages found"
     }
   },
+  "activityMessages": {
+    "selfAssigned": "{{name}} self-assigned this conversation",
+    "assignedToBy": "Conversation was assigned to {{name}} by {{assigner}}",
+    "assignedTo": "Conversation assigned to {{name}}",
+    "unassignedBy": "Conversation unassigned by {{name}}",
+    "resolvedBy": "Conversation was marked resolved by {{name}}",
+    "pendingBy": "Conversation was marked pending by {{name}}",
+    "reopenedBy": "Conversation was reopened by {{name}}",
+    "labelAdded": "{{name}} added {{label}}",
+    "labelRemoved": "{{name}} removed {{label}}",
+    "priorityChanged": "Priority changed to {{priority}} by {{name}}",
+    "joined": "{{name}} joined the conversation",
+    "left": "{{name}} left the conversation",
+    "teamAssigned": "Team {{name}} assigned to conversation",
+    "teamRemoved": "Team {{name}} removed from conversation"
+  },
   "pipeline": {
     "section": "Pipeline",
     "addTo": "Add to pipeline",

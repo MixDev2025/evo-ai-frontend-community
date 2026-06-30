@@ -1247,10 +1247,10 @@ const ChatSidebar = ({
                               <Badge
                                 variant="outline"
                                 className="h-4 px-1.5 text-[10px] bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-700 flex-shrink-0"
-                                title="Facebook Post"
+                                title={t('chatSidebar.facebookPost')}
                               >
                                 <FileText className="h-2.5 w-2.5 mr-0.5" />
-                                Post
+                                {t('chatSidebar.post')}
                               </Badge>
                             )}
                           </div>
@@ -1328,7 +1328,7 @@ const ChatSidebar = ({
                   className="w-full"
                   onClick={handleLoadMoreClick}
                 >
-                  Carregar mais
+                  {t('chatSidebar.loadMore')}
                 </Button>
               </div>
             )}

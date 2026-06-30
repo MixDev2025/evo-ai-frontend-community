@@ -31,7 +31,7 @@ interface RichTextEditorProps {
 export const RichTextEditor = forwardRef<RichTextEditorRef, RichTextEditorProps>(
   (
     {
-      placeholder = 'Digite sua nota privada...',
+      placeholder = '',
       value = '',
       onChange,
       onKeyDown,

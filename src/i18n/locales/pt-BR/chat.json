@@ -69,6 +69,13 @@
         "network": "Falha de rede ou bloqueio de CORS — não foi possível baixar diretamente."
       }
     },
+    "fileSize": {
+      "zero": "0 Bytes",
+      "bytes": "Bytes",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB"
+    },
     "messageImage": {
       "downloadStarted": "Download iniciado",
       "imageFallback": "Imagem",
@@ -78,7 +85,23 @@
     "messageList": {
       "loadingConversation": "Carregando conversa...",
       "loadingPrevious": "Carregando mensagens anteriores...",
-      "conversationStart": "Início da conversa"
+      "conversationStart": "Início da conversa",
+      "today": "Hoje",
+      "yesterday": "Ontem"
+    },
+    "messageInputSelect": {
+      "menu": "Menu"
+    },
+    "postPreview": {
+      "facebookPage": "Página do Facebook",
+      "openOnFacebook": "Abrir post no Facebook",
+      "postImageAlt": "Imagem do post",
+      "like_one": "{{count}} curtida",
+      "like_other": "{{count}} curtidas",
+      "comment_one": "{{count}} comentário",
+      "comment_other": "{{count}} comentários",
+      "share_one": "{{count}} compartilhamento",
+      "share_other": "{{count}} compartilhamentos"
     },
     "messageLocation": {
       "sharedLocation": "Localização compartilhada",
@@ -333,6 +356,9 @@
     "deselectAll": "Desmarcar todas",
     "bulkAssign": "Atribuir",
     "bulkLabels": "Etiquetas",
+    "facebookPost": "Post do Facebook",
+    "post": "Post",
+    "loadMore": "Carregar mais",
     "view": {
       "active": "Ativas",
       "archived": "Arquivadas"
@@ -703,6 +729,7 @@
       }
     },
     "audio": {
+      "tooltip": "Gravar Áudio",
       "sentSuccess": "Áudio enviado com sucesso!",
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
@@ -737,7 +764,13 @@
       "pendingNote": "Digite sua nota privada (conversa pendente)...",
       "privateNote": "Digite sua nota privada... (digite / para respostas prontas)",
       "mobilePrivateNote": "Digite sua nota privada..."
-    }
+    },
+    "sendTooltip": {
+      "enter": "Enviar (Enter)",
+      "modifier": "Enviar ({{modifier}} + Enter)"
+    },
+    "cannedResponseMediaBanner_one": "Esta resposta rápida inclui {{count}} arquivo de mídia. Ele será enviado junto com a mensagem.",
+    "cannedResponseMediaBanner_other": "Esta resposta rápida inclui {{count}} arquivos de mídia. Eles serão enviados junto com a mensagem."
   },
   "conversationsFilter": {
     "title": "Filtrar Conversas",
@@ -966,6 +999,8 @@
     "noResults": "Nenhum resultado encontrado",
     "emptyHint": "Digite para buscar conversas, contatos e mensagens",
     "typeMoreHint": "Digite pelo menos 2 caracteres",
+    "unknownContact": "Contato desconhecido",
+    "unknownSender": "Desconhecido",
     "sections": {
       "conversations": "Conversas",
       "contacts": "Contatos",

@@ -68,6 +68,13 @@
         "network": "Error de red o bloqueo de CORS — no se pudo descargar directamente."
       }
     },
+    "fileSize": {
+      "zero": "0 Bytes",
+      "bytes": "Bytes",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB"
+    },
     "messageImage": {
       "downloadStarted": "Descarga iniciada",
       "imageFallback": "Imagen",
@@ -77,7 +84,23 @@
     "messageList": {
       "loadingConversation": "Cargando conversación...",
       "loadingPrevious": "Cargando mensajes anteriores...",
-      "conversationStart": "Inicio de la conversación"
+      "conversationStart": "Inicio de la conversación",
+      "today": "Hoy",
+      "yesterday": "Ayer"
+    },
+    "messageInputSelect": {
+      "menu": "Menú"
+    },
+    "postPreview": {
+      "facebookPage": "Página de Facebook",
+      "openOnFacebook": "Abrir publicación en Facebook",
+      "postImageAlt": "Imagen de la publicación",
+      "like_one": "{{count}} me gusta",
+      "like_other": "{{count}} me gusta",
+      "comment_one": "{{count}} comentario",
+      "comment_other": "{{count}} comentarios",
+      "share_one": "{{count}} compartición",
+      "share_other": "{{count}} comparticiones"
     },
     "messageLocation": {
       "sharedLocation": "Ubicación compartida",
@@ -328,6 +351,9 @@
     "deselectAll": "Deseleccionar todas",
     "bulkAssign": "Asignar",
     "bulkLabels": "Etiquetas",
+    "facebookPost": "Publicación de Facebook",
+    "post": "Publicación",
+    "loadMore": "Cargar más",
     "view": {
       "active": "Activas",
       "archived": "Archivadas"
@@ -671,6 +697,7 @@
       }
     },
     "audio": {
+      "tooltip": "Grabar Audio",
       "sentSuccess": "¡Audio enviado con éxito!",
       "sendError": "Error al enviar audio",
       "converting": "Convirtiendo audio...",
@@ -702,7 +729,13 @@
       "pendingNote": "Escribe tu nota privada (conversación pendiente)...",
       "privateNote": "Escribe tu nota privada... (escribe / para respuestas rápidas)",
       "mobilePrivateNote": "Escribe tu nota privada..."
-    }
+    },
+    "sendTooltip": {
+      "enter": "Enviar (Enter)",
+      "modifier": "Enviar ({{modifier}} + Enter)"
+    },
+    "cannedResponseMediaBanner_one": "Esta respuesta rápida incluye {{count}} archivo de medio. Se enviará junto con el mensaje.",
+    "cannedResponseMediaBanner_other": "Esta respuesta rápida incluye {{count}} archivos de medio. Se enviarán junto con el mensaje."
   },
   "conversationsFilter": {
     "title": "Filtrar Conversaciones",
@@ -925,5 +958,23 @@
     "addError": "Error al agregar al pipeline",
     "moveError": "Error al mover a la etapa",
     "removeError": "Error al quitar del pipeline"
+  },
+  "globalSearch": {
+    "ariaLabel": "Búsqueda global",
+    "loading": "Buscando...",
+    "error": "Error en la búsqueda. Intenta de nuevo.",
+    "noResults": "No se encontraron resultados",
+    "emptyHint": "Escribe para buscar conversaciones, contactos y mensajes",
+    "typeMoreHint": "Escribe al menos 2 caracteres",
+    "unknownContact": "Contacto desconocido",
+    "unknownSender": "Desconocido",
+    "sections": {
+      "conversations": "Conversaciones",
+      "contacts": "Contactos",
+      "messages": "Mensajes",
+      "conversationsEmpty": "No se encontraron conversaciones",
+      "contactsEmpty": "No se encontraron contactos",
+      "messagesEmpty": "No se encontraron mensajes"
+    }
   }
 }

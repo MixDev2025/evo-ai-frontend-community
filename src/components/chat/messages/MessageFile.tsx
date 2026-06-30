@@ -60,7 +60,7 @@ const MessageFile: React.FC<MessageFileProps> = ({ attachments }) => {
   const formatFileSize = (bytes?: number): string => {
     if (!bytes) return t('messages.messageFile.unknownSize');
 
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const sizes = [t('messages.fileSize.bytes'), t('messages.fileSize.kb'), t('messages.fileSize.mb'), t('messages.fileSize.gb')];
     const i = Math.floor(Math.log(bytes) / Math.log(1024));
     return Math.round((bytes / Math.pow(1024, i)) * 100) / 100 + ' ' + sizes[i];
   };

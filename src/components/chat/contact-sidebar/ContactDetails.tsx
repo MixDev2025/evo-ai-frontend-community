@@ -37,7 +37,7 @@ interface ContactDetailsProps {
 }
 
 const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
-  const { t } = useLanguage('chat');
+  const { t, currentLanguage } = useLanguage('chat');
 
   const { updateContactInConversations } = useConversations();
 
@@ -57,7 +57,7 @@ const ContactDetails: React.FC<ContactDetailsProps> = ({ contact }) => {
     if (!iso) return t('contactSidebar.contactDetails.notInformed');
     const date = new Date(iso);
     if (isNaN(date.getTime())) return t('contactSidebar.contactDetails.notInformed');
-    return date.toLocaleDateString('pt-BR', {
+    return date.toLocaleDateString(currentLanguage, {
       day: '2-digit',
       month: '2-digit',
       year: 'numeric',

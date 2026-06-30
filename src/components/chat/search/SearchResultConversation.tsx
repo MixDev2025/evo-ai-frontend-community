@@ -2,6 +2,7 @@ import { CommandItem } from '@evoapi/design-system';
 import { MessageSquare } from 'lucide-react';
 import type { SearchConversationResult } from '@/types/chat/search';
 import { highlightMatch } from './searchHighlight';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface Props {
   item: SearchConversationResult;
@@ -10,7 +11,8 @@ interface Props {
 }
 
 export default function SearchResultConversation({ item, query, onSelect }: Props) {
-  const contactName = item.contact?.name ?? 'Unknown contact';
+  const { t } = useLanguage('chat');
+  const contactName = item.contact?.name ?? t('globalSearch.unknownContact');
   const snippet = item.message?.content ?? '';
   const inboxName = item.inbox?.name;
 

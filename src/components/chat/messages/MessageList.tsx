@@ -101,7 +101,7 @@ const getMessageTimestamp = (message: Message): number => {
 
 // Igual ao MessagesContext: mensagens "em envio" (status progress) sempre por último
 // Helper para formatar data como separador (Today, Yesterday, ou data)
-const formatDateSeparator = (timestamp: number): string => {
+const formatDateSeparator = (timestamp: number, t: (key: string) => string, locale: string): string => {
   const messageDate = new Date(timestamp * 1000);
   const today = new Date();
   const yesterday = new Date(today);
@@ -112,7 +112,7 @@ const formatDateSeparator = (timestamp: number): string => {
     messageDate.getMonth() === today.getMonth() &&
     messageDate.getFullYear() === today.getFullYear()
   ) {
-    return 'Today';
+    return t('messages.messageList.today');
   }
 
   if (
@@ -120,10 +120,10 @@ const formatDateSeparator = (timestamp: number): string => {
     messageDate.getMonth() === yesterday.getMonth() &&
     messageDate.getFullYear() === yesterday.getFullYear()
   ) {
-    return 'Yesterday';
+    return t('messages.messageList.yesterday');
   }
 
-  return messageDate.toLocaleDateString('en-US', {
+  return messageDate.toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
     year: messageDate.getFullYear() !== today.getFullYear() ? 'numeric' : undefined,
@@ -164,7 +164,7 @@ const MessageList: React.FC<MessageListProps> = ({
   onCopyMessage,
   onDeleteMessage,
 }) => {
-  const { t } = useLanguage('chat');
+  const { t, currentLanguage } = useLanguage('chat');
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isNearBottom, setIsNearBottom] = useState(true);
   const conversationIdRef = useRef<string | null>(null);
@@ -627,7 +627,7 @@ const MessageList: React.FC<MessageListProps> = ({
 
               // Separador de data (estilo WhatsApp)
               const showDateSeparator = lastDateMessage && !isSameDay(lastDateMessage, message);
-              const dateSeparator = showDateSeparator ? formatDateSeparator(getMessageTimestamp(message)) : null;
+              const dateSeparator = showDateSeparator ? formatDateSeparator(getMessageTimestamp(message), t, currentLanguage) : null;
 
               lastDateMessage = message;
 

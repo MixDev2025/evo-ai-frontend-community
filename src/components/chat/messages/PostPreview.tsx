@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@evoapi/design-system/avatar';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface PostData {
   id?: string;
@@ -42,6 +43,8 @@ interface PostPreviewProps {
 }
 
 const PostPreview: React.FC<PostPreviewProps> = ({ postData }) => {
+  const { t, currentLanguage } = useLanguage('chat');
+
   if (!postData || Object.keys(postData).length === 0) {
     return null;
   }
@@ -73,14 +76,14 @@ const PostPreview: React.FC<PostPreviewProps> = ({ postData }) => {
   const postImage = getPostImage();
   const postText = postData.message || postData.story || '';
   const postUrl = postData.permalink_url;
-  const postAuthor = postData.from?.name || 'Facebook Page';
+  const postAuthor = postData.from?.name || t('messages.postPreview.facebookPage');
 
   // Formatar data
   const formatDate = (dateString?: string) => {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('pt-BR', {
+      return date.toLocaleDateString(currentLanguage, {
         day: '2-digit',
         month: 'short',
         year: 'numeric',
@@ -115,7 +118,7 @@ const PostPreview: React.FC<PostPreviewProps> = ({ postData }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-foreground transition-colors"
-                title="Abrir post no Facebook"
+                title={t('messages.postPreview.openOnFacebook')}
               >
                 <ExternalLink className="h-4 w-4" />
               </a>
@@ -135,7 +138,7 @@ const PostPreview: React.FC<PostPreviewProps> = ({ postData }) => {
           <div className="relative w-full bg-muted">
             <img
               src={postImage}
-              alt="Post image"
+              alt={t('messages.postPreview.postImageAlt')}
               className="w-full h-auto object-contain max-h-96"
               loading="lazy"
               onError={(e) => {
@@ -155,17 +158,17 @@ const PostPreview: React.FC<PostPreviewProps> = ({ postData }) => {
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
               {(postData.likes_count ?? 0) > 0 && (
                 <span>
-                  {postData.likes_count} {postData.likes_count === 1 ? 'curtida' : 'curtidas'}
+                  {t('messages.postPreview.like', { count: postData.likes_count ?? 0 })}
                 </span>
               )}
               {(postData.comments_count ?? 0) > 0 && (
                 <span>
-                  {postData.comments_count} {postData.comments_count === 1 ? 'comentário' : 'comentários'}
+                  {t('messages.postPreview.comment', { count: postData.comments_count ?? 0 })}
                 </span>
               )}
               {(postData.shares_count ?? 0) > 0 && (
                 <span>
-                  {postData.shares_count} {postData.shares_count === 1 ? 'compartilhamento' : 'compartilhamentos'}
+                  {t('messages.postPreview.share', { count: postData.shares_count ?? 0 })}
                 </span>
               )}
             </div>

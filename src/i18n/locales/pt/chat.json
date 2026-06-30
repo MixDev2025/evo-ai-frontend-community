@@ -68,6 +68,13 @@
         "network": "Falha de rede ou bloqueio de CORS — não foi possível descarregar diretamente."
       }
     },
+    "fileSize": {
+      "zero": "0 Bytes",
+      "bytes": "Bytes",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB"
+    },
     "messageImage": {
       "downloadStarted": "Download iniciado",
       "imageFallback": "Imagem",
@@ -77,7 +84,23 @@
     "messageList": {
       "loadingConversation": "Carregando conversa...",
       "loadingPrevious": "Carregando mensagens anteriores...",
-      "conversationStart": "Início da conversa"
+      "conversationStart": "Início da conversa",
+      "today": "Hoje",
+      "yesterday": "Ontem"
+    },
+    "messageInputSelect": {
+      "menu": "Menu"
+    },
+    "postPreview": {
+      "facebookPage": "Página do Facebook",
+      "openOnFacebook": "Abrir publicação no Facebook",
+      "postImageAlt": "Imagem da publicação",
+      "like_one": "{{count}} gosto",
+      "like_other": "{{count}} gostos",
+      "comment_one": "{{count}} comentário",
+      "comment_other": "{{count}} comentários",
+      "share_one": "{{count}} partilha",
+      "share_other": "{{count}} partilhas"
     },
     "messageLocation": {
       "sharedLocation": "Localização compartilhada",
@@ -326,6 +349,11 @@
     "filtersButton": "Filtros",
     "bulkAssign": "Atribuir",
     "bulkLabels": "Etiquetas",
+    "selectAll": "Selecionar todas {{count}}",
+    "deselectAll": "Desmarcar todas",
+    "facebookPost": "Publicação do Facebook",
+    "post": "Publicação",
+    "loadMore": "Carregar mais",
     "view": {
       "active": "Ativas",
       "archived": "Arquivadas"
@@ -669,6 +697,7 @@
       }
     },
     "audio": {
+      "tooltip": "Gravar Áudio",
       "sentSuccess": "Áudio enviado com sucesso!",
       "sendError": "Erro ao enviar áudio",
       "converting": "Convertendo áudio...",
@@ -703,7 +732,13 @@
       "pendingNote": "Digite sua nota privada (conversa pendente)...",
       "privateNote": "Digite sua nota privada... (digite / para respostas prontas)",
       "mobilePrivateNote": "Digite sua nota privada..."
-    }
+    },
+    "sendTooltip": {
+      "enter": "Enviar (Enter)",
+      "modifier": "Enviar ({{modifier}} + Enter)"
+    },
+    "cannedResponseMediaBanner_one": "Esta resposta rápida inclui {{count}} ficheiro de mídia. Ele será enviado junto com a mensagem.",
+    "cannedResponseMediaBanner_other": "Esta resposta rápida inclui {{count}} ficheiros de mídia. Eles serão enviados junto com a mensagem."
   },
   "conversationsFilter": {
     "title": "Filtrar Conversas",
@@ -926,5 +961,23 @@
     "addError": "Erro ao adicionar ao pipeline",
     "moveError": "Erro ao mover para o estágio",
     "removeError": "Erro ao remover do pipeline"
+  },
+  "globalSearch": {
+    "ariaLabel": "Pesquisa global",
+    "loading": "Pesquisando...",
+    "error": "Erro na pesquisa. Tente novamente.",
+    "noResults": "Nenhum resultado encontrado",
+    "emptyHint": "Digite para pesquisar conversas, contactos e mensagens",
+    "typeMoreHint": "Digite pelo menos 2 caracteres",
+    "unknownContact": "Contacto desconhecido",
+    "unknownSender": "Desconhecido",
+    "sections": {
+      "conversations": "Conversas",
+      "contacts": "Contactos",
+      "messages": "Mensagens",
+      "conversationsEmpty": "Nenhuma conversa encontrada",
+      "contactsEmpty": "Nenhum contacto encontrado",
+      "messagesEmpty": "Nenhuma mensagem encontrada"
+    }
   }
 }

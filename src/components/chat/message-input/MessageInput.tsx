@@ -586,10 +586,10 @@ const MessageInput: React.FC<MessageInputProps> = ({
 
     if (messageKey === 'cmd_enter') {
       const modifier = getModifierSymbol();
-      return `Enviar (${modifier} + Enter)`;
+      return t('messageInput.sendTooltip.modifier', { modifier });
     }
 
-    return 'Enviar (Enter)';
+    return t('messageInput.sendTooltip.enter');
   }, [user?.ui_settings?.editor_message_key]);
 
   const cardClassNames = `
@@ -667,8 +667,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           <div className="border-b border-border bg-muted/20 px-4 py-2 flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
               <span className="text-xs text-muted-foreground">
-                Esta resposta rápida inclui {selectedCannedResponse!.attachments!.length} arquivo(s)
-                de mídia. Eles serão enviados junto com a mensagem.
+                {t('messageInput.cannedResponseMediaBanner', { count: selectedCannedResponse!.attachments!.length })}
               </span>
             </div>
             <Button
@@ -915,7 +914,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>{canSend || selectedFiles.length > 0 ? sendButtonTooltip : t('messageInput.audio.tooltip', 'Gravar Áudio')}</p>
+                    <p>{canSend || selectedFiles.length > 0 ? sendButtonTooltip : t('messageInput.audio.tooltip')}</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>

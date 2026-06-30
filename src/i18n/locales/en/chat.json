@@ -69,6 +69,13 @@
         "network": "Network error or CORS block — could not download directly."
       }
     },
+    "fileSize": {
+      "zero": "0 Bytes",
+      "bytes": "Bytes",
+      "kb": "KB",
+      "mb": "MB",
+      "gb": "GB"
+    },
     "messageImage": {
       "downloadStarted": "Download started",
       "imageFallback": "Image",
@@ -78,7 +85,23 @@
     "messageList": {
       "loadingConversation": "Loading conversation...",
       "loadingPrevious": "Loading previous messages...",
-      "conversationStart": "Start of conversation"
+      "conversationStart": "Start of conversation",
+      "today": "Today",
+      "yesterday": "Yesterday"
+    },
+    "messageInputSelect": {
+      "menu": "Menu"
+    },
+    "postPreview": {
+      "facebookPage": "Facebook Page",
+      "openOnFacebook": "Open post on Facebook",
+      "postImageAlt": "Post image",
+      "like_one": "{{count}} like",
+      "like_other": "{{count}} likes",
+      "comment_one": "{{count}} comment",
+      "comment_other": "{{count}} comments",
+      "share_one": "{{count}} share",
+      "share_other": "{{count}} shares"
     },
     "messageLocation": {
       "sharedLocation": "Shared location",
@@ -334,6 +357,9 @@
     "deselectAll": "Deselect all",
     "bulkAssign": "Assign",
     "bulkLabels": "Labels",
+    "facebookPost": "Facebook Post",
+    "post": "Post",
+    "loadMore": "Load more",
     "view": {
       "active": "Active",
       "archived": "Archived"
@@ -704,6 +730,7 @@
       }
     },
     "audio": {
+      "tooltip": "Record Audio",
       "sentSuccess": "Audio sent successfully!",
       "sendError": "Error sending audio",
       "converting": "Converting audio...",
@@ -735,7 +762,13 @@
       "pendingNote": "Type your private note (pending conversation)...",
       "privateNote": "Type your private note... (type / for canned responses)",
       "mobilePrivateNote": "Type your private note..."
-    }
+    },
+    "sendTooltip": {
+      "enter": "Send (Enter)",
+      "modifier": "Send ({{modifier}} + Enter)"
+    },
+    "cannedResponseMediaBanner_one": "This quick reply includes {{count}} media file. It will be sent along with the message.",
+    "cannedResponseMediaBanner_other": "This quick reply includes {{count}} media files. They will be sent along with the message."
   },
   "conversationsFilter": {
     "title": "Filter Conversations",
@@ -964,6 +997,8 @@
     "noResults": "No results found",
     "emptyHint": "Type to search conversations, contacts, and messages",
     "typeMoreHint": "Type at least 2 characters",
+    "unknownContact": "Unknown contact",
+    "unknownSender": "Unknown",
     "sections": {
       "conversations": "Conversations",
       "contacts": "Contacts",

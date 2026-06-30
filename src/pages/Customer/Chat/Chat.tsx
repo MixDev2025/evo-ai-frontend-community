@@ -1006,7 +1006,7 @@ const Chat = () => {
           data-tour="chat-main-area"
           className={`
           ${mobileView === 'chat' ? 'flex' : 'hidden'} md:flex
-          flex-1 flex-col h-full min-h-0 max-h-full overflow-hidden
+          flex-1 flex-col h-full min-h-0 max-h-full
         `}
         >
           {selectedConversation ? (

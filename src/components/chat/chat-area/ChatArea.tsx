@@ -307,7 +307,7 @@ const ChatArea = ({
   const typingUsers = websocket.getTypingUsers(selectedConversationId);
 
   return (
-    <div className="flex-1 flex flex-col min-h-0 bg-[#E5DDD5] dark:bg-[#0B141A] h-full">
+    <div className="flex-1 flex flex-col min-h-0 bg-[#E5DDD5] dark:bg-[#0B141A] h-full overflow-hidden">
       {/* 🎯 MESSAGING WINDOW RESTRICTIONS: Banner de aviso (WhatsApp, Instagram, Messenger) */}
       {/* Posicionado no topo, logo após o header, para máxima visibilidade */}
       {shouldShowRestrictionBanner && (

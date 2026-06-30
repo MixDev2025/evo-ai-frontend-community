@@ -110,7 +110,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
   const isChatWithConversation = pathname.startsWith('/conversations/') && pathname !== '/conversations';
 
   return (
-    <div className="flex flex-col h-screen bg-background transition-colors duration-150 ease-in-out">
+    <div className="flex flex-col h-dvh md:h-screen bg-background transition-colors duration-150 ease-in-out">
 
       {/* Header - hidden on mobile when viewing a conversation */}
       <div className={isChatWithConversation ? 'hidden md:block' : ''}>

@@ -1,11 +1,10 @@
-import { TFunction } from 'i18next';
-
 /**
  * Translates English activity messages from the backend into the current language.
  * Backend sends messages like "User self-assigned this conversation" in English.
  * This function maps common patterns to translated versions.
  */
-export function translateActivityMessage(content: string, t: TFunction): string {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function translateActivityMessage(content: string, t: (key: string, options?: any) => string): string {
   if (!content) return content;
 
   // Pattern: "{name} self-assigned this conversation"

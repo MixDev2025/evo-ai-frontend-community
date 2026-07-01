@@ -368,7 +368,7 @@ const TwoFactorSetup = ({ onUpdate }: TwoFactorSetupProps) => {
                 </AlertDescription>
               </Alert>
 
-              <div className="grid grid-cols-2 gap-2 p-4 bg-muted rounded-lg">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 p-4 bg-muted rounded-lg">
                 {backupCodes.map((code, index) => (
                   <div key={index} className="font-mono text-sm flex items-center gap-2">
                     <span className="text-muted-foreground">{index + 1}.</span>

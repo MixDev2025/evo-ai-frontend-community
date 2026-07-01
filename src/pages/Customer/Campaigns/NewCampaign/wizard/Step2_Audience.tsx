@@ -276,9 +276,9 @@ const Step2_Audience = ({ data, onChange, onNext, onBack }: Step2Props) => {
               </p>
 
               {/* Add Filter Form */}
-              <div className="grid grid-cols-12 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-2">
                 {/* Operator */}
-                <div className="col-span-3">
+                <div className="col-span-1 sm:col-span-3">
                   <Select value={newFilterOperator} onValueChange={(v) => setNewFilterOperator(v as FilterOperator)}>
                     <SelectTrigger className="h-10">
                       <SelectValue />
@@ -291,7 +291,7 @@ const Step2_Audience = ({ data, onChange, onNext, onBack }: Step2Props) => {
                 </div>
 
                 {/* Type */}
-                <div className="col-span-3">
+                <div className="col-span-1 sm:col-span-3">
                   <Select value={newFilterType} onValueChange={(v) => { setNewFilterType(v as FilterType); setNewFilterValue(''); }}>
                     <SelectTrigger className="h-10">
                       <SelectValue />
@@ -304,7 +304,7 @@ const Step2_Audience = ({ data, onChange, onNext, onBack }: Step2Props) => {
                 </div>
 
                 {/* Value */}
-                <div className="col-span-5">
+                <div className="col-span-1 sm:col-span-5">
                   <Select value={newFilterValue} onValueChange={setNewFilterValue}>
                     <SelectTrigger className="h-10">
                       <SelectValue placeholder={newFilterType === 'segment' ? t('wizard.step2.selectSegment') : t('wizard.step2.selectTag')} />
@@ -328,7 +328,7 @@ const Step2_Audience = ({ data, onChange, onNext, onBack }: Step2Props) => {
                 </div>
 
                 {/* Add Button */}
-                <div className="col-span-1">
+                <div className="col-span-1 sm:col-span-1">
                   <Button
                     type="button"
                     size="icon"

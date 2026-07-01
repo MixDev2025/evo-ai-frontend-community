@@ -692,7 +692,7 @@ const TaskConfigForm = ({
 
       {/* Description Modal */}
       <Dialog open={isDescriptionModalOpen} onOpenChange={handleDescriptionModalOpenChange}>
-        <DialogContent className="sm:max-w-[1200px] max-h-[90vh] overflow-hidden flex flex-col">
+        <DialogContent className="sm:max-w-[1200px] max-h-[90vh] overflow-y-auto flex flex-col">
           <DialogHeader>
             <DialogTitle>{t('wizard.step3.taskConfig.taskDescription')}</DialogTitle>
           </DialogHeader>

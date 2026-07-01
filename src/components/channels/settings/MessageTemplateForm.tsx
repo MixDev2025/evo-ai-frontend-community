@@ -291,7 +291,7 @@ const TemplateFormModal: React.FC<{
               <>
                 {/* Header */}
                 {channelConfig.supportsMedia && (
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     <div className="col-span-1">
                       <label className="block text-sm font-medium mb-2">
                         {t('settings.messageTemplates.form.headerFormat')}
@@ -325,7 +325,7 @@ const TemplateFormModal: React.FC<{
                       </Select>
                     </div>
                     {formData.headerFormat === 'TEXT' && (
-                      <div className="col-span-2">
+                      <div className="col-span-1 sm:col-span-2">
                         <label className="block text-sm font-medium mb-2">
                           {t('settings.messageTemplates.form.headerText')}
                         </label>
@@ -490,7 +490,7 @@ const TemplateFormModal: React.FC<{
                   {t('settings.messageTemplates.form.variables')}
                 </label>
                 {formData.variables?.map(variable => (
-                  <div key={variable.name} className="grid grid-cols-4 gap-2">
+                  <div key={variable.name} className="grid grid-cols-1 sm:grid-cols-4 gap-2">
                     <Input value={variable.name} disabled />
                     <Input
                       value={variable.label ?? ''}

@@ -95,9 +95,9 @@ export function WebhookHeadersConfig({ data, onChange, journeyId }: WebhookHeade
 
             return (
               <div key={index} className="p-3 border rounded-lg bg-sidebar-accent/10 space-y-3">
-                <div className="grid grid-cols-12 gap-3 items-end">
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
                   {/* Key */}
-                  <div className="col-span-4">
+                  <div className="col-span-1 sm:col-span-4">
                     <Label className="text-xs">{t('panels.sendWebhook.headers.headerName')}</Label>
                     <VariableInput
                       value={header.key}
@@ -109,7 +109,7 @@ export function WebhookHeadersConfig({ data, onChange, journeyId }: WebhookHeade
                   </div>
 
                   {/* Value */}
-                  <div className="col-span-6">
+                  <div className="col-span-1 sm:col-span-6">
                     <Label className="text-xs">{t('panels.sendWebhook.headers.headerValue')}</Label>
                     <div className="relative">
                       <VariableInput
@@ -144,7 +144,7 @@ export function WebhookHeadersConfig({ data, onChange, journeyId }: WebhookHeade
                   </div>
 
                   {/* Remove button */}
-                  <div className="col-span-2">
+                  <div className="col-span-1 sm:col-span-2">
                     <Button
                       variant="ghost"
                       size="sm"

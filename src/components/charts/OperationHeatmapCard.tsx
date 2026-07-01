@@ -83,7 +83,7 @@ const OperationHeatmapCard = ({
       <CardContent className="space-y-4">
         <div className="overflow-x-auto">
           <div
-            className="grid gap-1 min-w-[760px]"
+            className="grid gap-1 sm:min-w-[760px]"
             style={{ gridTemplateColumns: '72px repeat(24, minmax(20px, 1fr))' }}
           >
             <div />

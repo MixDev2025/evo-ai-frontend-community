@@ -209,8 +209,8 @@ export function ConditionalPanel({
           </div>
         )}
 
-        <div className="grid grid-cols-12 gap-2 items-end">
-          <div className="col-span-4">
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-end">
+          <div className="col-span-1 sm:col-span-4">
             <Label className="text-xs">{t('panels.conditional.field')}</Label>
             <VariableSelect
               value={condition.field || ''}
@@ -222,7 +222,7 @@ export function ConditionalPanel({
             />
           </div>
 
-          <div className="col-span-3">
+          <div className="col-span-1 sm:col-span-3">
             <Label className="text-xs">{t('panels.conditional.operator')}</Label>
             <Select
               value={condition.operator}
@@ -245,7 +245,7 @@ export function ConditionalPanel({
             </Select>
           </div>
 
-          <div className="col-span-4">
+          <div className="col-span-1 sm:col-span-4">
             <Label className="text-xs">{t('panels.conditional.value')}</Label>
             {needsValue(condition.operator) ? (
               <VariableInput
@@ -265,7 +265,7 @@ export function ConditionalPanel({
             )}
           </div>
 
-          <div className="col-span-1">
+          <div className="col-span-1 sm:col-span-1">
             <Button
               variant="ghost"
               size="sm"

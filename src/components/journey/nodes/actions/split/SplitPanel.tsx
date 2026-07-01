@@ -143,8 +143,8 @@ export function SplitPanel({ nodeId, data, onUpdate, onClose }: SplitPanelProps)
 
   const renderVariant = (variant: SplitVariant) => (
     <div key={variant.id} className="p-4 border border-border rounded-lg bg-sidebar-accent/10 space-y-3">
-      <div className="grid grid-cols-12 gap-3 items-end">
-        <div className="col-span-4">
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
+        <div className="col-span-1 sm:col-span-4">
           <Label className="text-xs">{t('panels.split.variants.name')}</Label>
           <Input
             value={variant.name}
@@ -154,7 +154,7 @@ export function SplitPanel({ nodeId, data, onUpdate, onClose }: SplitPanelProps)
           />
         </div>
 
-        <div className="col-span-3">
+        <div className="col-span-1 sm:col-span-3">
           <Label className="text-xs">{t('panels.split.variants.color')}</Label>
           <Select
             value={variant.color}
@@ -177,7 +177,7 @@ export function SplitPanel({ nodeId, data, onUpdate, onClose }: SplitPanelProps)
           </Select>
         </div>
 
-        <div className="col-span-3">
+        <div className="col-span-1 sm:col-span-3">
           <Label className="text-xs">{t('panels.split.variants.percentage')}</Label>
           <Input
             type="number"
@@ -189,7 +189,7 @@ export function SplitPanel({ nodeId, data, onUpdate, onClose }: SplitPanelProps)
           />
         </div>
 
-        <div className="col-span-2">
+        <div className="col-span-1 sm:col-span-2">
           <Button
             variant="ghost"
             size="sm"

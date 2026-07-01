@@ -228,7 +228,7 @@ export default function MacroFormModal({ isOpen, onClose, macro, onSuccess }: Ma
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl w-[85vw] min-w-[700px] max-h-[90vh] overflow-y-auto bg-sidebar border-sidebar-border">
+      <DialogContent className="max-w-6xl w-[85vw] sm:min-w-[700px] max-h-[90vh] overflow-y-auto bg-sidebar border-sidebar-border">
         <DialogHeader>
           <DialogTitle className="text-sidebar-foreground">
             {isEditing ? t('modal.title.edit') : t('modal.title.create')}

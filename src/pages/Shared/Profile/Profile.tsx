@@ -1203,7 +1203,7 @@ const Profile = () => {
       </div>
 
       <Tabs value={activeTab} onValueChange={handleTabChange} className="w-full">
-        <TabsList className="grid w-full grid-cols-4 mb-8">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-8">
           <TabsTrigger value="dados">{t('tabs.personalData')}</TabsTrigger>
           <TabsTrigger value="interface">{t('tabs.interface')}</TabsTrigger>
           <TabsTrigger value="notificacoes">{t('tabs.notifications')}</TabsTrigger>

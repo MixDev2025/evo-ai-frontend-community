@@ -219,7 +219,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                 </div>
 
                 <div className="grid gap-4">
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
                     <Label htmlFor="name">{t('form.labels.name')}</Label>
                     <Input
                       id="name"
@@ -230,12 +230,12 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                           name: e.target.value,
                         })
                       }
-                      className="col-span-3"
+                      className="col-span-1 sm:col-span-3"
                       placeholder={t('form.placeholders.name')}
                     />
                   </div>
 
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
                     <Label htmlFor="provider">{t('form.labels.provider')}</Label>
                     <Select
                       value={currentApiKey.provider}
@@ -247,7 +247,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                         })
                       }
                     >
-                      <SelectTrigger className="col-span-3">
+                      <SelectTrigger className="col-span-1 sm:col-span-3">
                         <SelectValue placeholder={t('form.placeholders.provider')} />
                       </SelectTrigger>
                       <SelectContent>
@@ -261,7 +261,7 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                   </div>
 
                   {currentApiKey.provider === CUSTOM_OPENAI_PROVIDER && (
-                    <div className="grid grid-cols-4 items-center gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
                       <Label htmlFor="base_url">Base URL</Label>
                       <Input
                         id="base_url"
@@ -272,20 +272,20 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                             base_url: e.target.value,
                           })
                         }
-                        className="col-span-3"
+                        className="col-span-1 sm:col-span-3"
                         placeholder="https://api.example.com/v1"
                       />
                     </div>
                   )}
 
-                  <div className="grid grid-cols-4 items-center gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
                     <Label htmlFor="key_value">
                       {t('form.labels.key')}
                       {currentApiKey.provider !== CUSTOM_OPENAI_PROVIDER && (
                         <span className="text-red-500 ml-1">*</span>
                       )}
                     </Label>
-                    <div className="col-span-3 relative">
+                    <div className="col-span-1 sm:col-span-3 relative">
                       <Input
                         id="key_value"
                         value={currentApiKey.key_value || ''}
@@ -316,9 +316,9 @@ export function ApiKeysModal({ open, onOpenChange, onApiKeysChange }: ApiKeysMod
                   </div>
 
                   {isEditingKey && (
-                    <div className="grid grid-cols-4 items-center gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-4 items-center gap-4">
                       <Label htmlFor="is_active">{t('form.labels.status')}</Label>
-                      <div className="col-span-3 flex items-center space-x-2">
+                      <div className="col-span-1 sm:col-span-3 flex items-center space-x-2">
                         <Checkbox
                           id="is_active"
                           checked={currentApiKey.is_active !== false}

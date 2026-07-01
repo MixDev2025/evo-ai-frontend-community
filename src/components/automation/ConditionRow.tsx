@@ -158,7 +158,7 @@ export default function ConditionRow({ control, index, formData, onRemove }: Pro
 
   return (
     <div className="flex items-start gap-2 p-3 border rounded-md">
-      <div className="flex-1 grid grid-cols-3 gap-2">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-3 gap-2">
         <Controller
           control={control}
           name={`conditions.${index}.attribute_key`}

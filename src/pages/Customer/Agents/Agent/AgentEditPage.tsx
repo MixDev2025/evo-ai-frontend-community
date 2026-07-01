@@ -1012,7 +1012,7 @@ const AgentEditPage = () => {
   }
 
   return (
-    <div className="flex h-full bg-background">
+    <div className="flex flex-col lg:flex-row h-full bg-background">
       {/* Sidebar */}
       <AgentEditSidebar
         agent={agent}

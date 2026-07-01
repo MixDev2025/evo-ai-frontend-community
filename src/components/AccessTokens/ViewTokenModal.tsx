@@ -55,7 +55,7 @@ export default function ViewTokenModal({
         <div className="max-h-[60vh] overflow-y-auto">
           <div className="space-y-6">
           {/* Token Info */}
-          <div className="grid grid-cols-2 gap-4 p-4 bg-muted rounded-lg">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 bg-muted rounded-lg">
             <div>
               <p className="text-sm font-medium text-muted-foreground">{t('viewModal.labels.name')}</p>
               <p className="font-medium">{token.name}</p>
@@ -154,7 +154,7 @@ export default function ViewTokenModal({
           <div className="space-y-4 p-4 bg-muted rounded-lg">
             <h4 className="font-medium">Token Details</h4>
             
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <p className="text-sm font-medium text-muted-foreground">{t('viewModal.labels.createdAt')}</p>
                 <p className="text-sm">{new Date(token.created_at).toLocaleString()}</p>

@@ -79,7 +79,7 @@ export default function NotificationBell() {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent
-        className="w-[520px] p-0 bg-background border shadow-lg"
+        className="w-[90vw] sm:w-[520px] p-0 bg-background border shadow-lg"
         align="end"
         sideOffset={8}
       >

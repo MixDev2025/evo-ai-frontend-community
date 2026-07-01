@@ -725,7 +725,7 @@ const AgentWizardModal = ({ open, onOpenChange, onAgentCreated, embedded = false
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="!w-[72vw] !max-w-[72vw] h-[94vh] max-h-[94vh] overflow-hidden p-0 sm:!max-w-[72vw]">
+      <DialogContent className="!w-[95vw] sm:!w-[72vw] !max-w-[95vw] sm:!max-w-[72vw] h-[94vh] max-h-[94vh] sm:overflow-hidden p-0">
         {wizardContent}
       </DialogContent>
     </Dialog>

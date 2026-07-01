@@ -172,7 +172,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
         </DialogHeader>
 
         <Tabs defaultValue="general" className="flex-1 overflow-hidden flex flex-col">
-          <TabsList className="grid grid-cols-4 w-full">
+          <TabsList className="grid grid-cols-1 sm:grid-cols-4 w-full">
             <TabsTrigger value="general">{t('modal.tabs.general')}</TabsTrigger>
             <TabsTrigger value="media">{t('modal.tabs.media')}</TabsTrigger>
             <TabsTrigger value="variants">{t('modal.tabs.variants')}</TabsTrigger>
@@ -180,8 +180,8 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
           </TabsList>
 
           <TabsContent value="general" className="space-y-4 overflow-y-auto pt-4">
-            <div className="grid grid-cols-2 gap-3">
-              <div className="col-span-2 space-y-1.5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="col-span-1 sm:col-span-2 space-y-1.5">
                 <Label htmlFor="p-name">{t('fields.name')} *</Label>
                 <Input
                   id="p-name"
@@ -286,7 +286,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
                 </Select>
               </div>
 
-              <div className="col-span-2 space-y-1.5">
+              <div className="col-span-1 sm:col-span-2 space-y-1.5">
                 <Label htmlFor="p-url">{t('fields.purchaseUrl')}</Label>
                 <Input
                   id="p-url"
@@ -297,7 +297,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
                 />
               </div>
 
-              <div className="col-span-2 space-y-1.5">
+              <div className="col-span-1 sm:col-span-2 space-y-1.5">
                 <Label htmlFor="p-desc">{t('fields.description')}</Label>
                 <Textarea
                   id="p-desc"
@@ -332,7 +332,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
             {product?.images && product.images.length > 0 && (
               <div>
                 <p className="text-sm font-medium mb-2">{t('media.existing')}</p>
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {product.images.map((image) => (
                     <div key={image.id} className="border rounded overflow-hidden">
                       <img src={image.url} alt={image.filename} className="w-full h-32 object-cover" />
@@ -374,8 +374,8 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
               {variants.map((variant, idx) => {
                 if (variant._destroy) return null;
                 return (
-                  <div key={variant.id ?? `new-${idx}`} className="grid grid-cols-12 gap-2 items-end border rounded-md p-3">
-                    <div className="col-span-4 space-y-1.5">
+                  <div key={variant.id ?? `new-${idx}`} className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-end border rounded-md p-3">
+                    <div className="col-span-1 sm:col-span-4 space-y-1.5">
                       <Label className="text-xs">{t('variants.name')}</Label>
                       <Input
                         value={variant.name}
@@ -383,14 +383,14 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
                         placeholder="P / M / G"
                       />
                     </div>
-                    <div className="col-span-3 space-y-1.5">
+                    <div className="col-span-1 sm:col-span-3 space-y-1.5">
                       <Label className="text-xs">{t('variants.sku')}</Label>
                       <Input
                         value={variant.sku ?? ''}
                         onChange={(e) => handleVariantChange(idx, { sku: e.target.value })}
                       />
                     </div>
-                    <div className="col-span-2 space-y-1.5">
+                    <div className="col-span-1 sm:col-span-2 space-y-1.5">
                       <Label className="text-xs">{t('variants.priceOverride')}</Label>
                       <Input
                         type="number"
@@ -404,7 +404,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
                         }
                       />
                     </div>
-                    <div className="col-span-2 space-y-1.5">
+                    <div className="col-span-1 sm:col-span-2 space-y-1.5">
                       <Label className="text-xs">{t('variants.stock')}</Label>
                       <Input
                         type="number"
@@ -417,7 +417,7 @@ export default function ProductModal({ open, product, loading, onOpenChange, onS
                         }
                       />
                     </div>
-                    <div className="col-span-1 flex justify-end">
+                    <div className="col-span-1 sm:col-span-1 flex justify-end">
                       <Button
                         variant="ghost"
                         size="icon"

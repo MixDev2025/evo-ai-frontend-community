@@ -117,7 +117,7 @@ export default function CreateStageModal({
             {/* Color */}
             <div className="grid gap-2">
               <Label>{t('createStage.color')}</Label>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {colorOptions.map((colorOption) => (
                   <button
                     key={colorOption.value}

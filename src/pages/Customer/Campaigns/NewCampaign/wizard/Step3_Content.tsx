@@ -177,7 +177,7 @@ const Step3_Content = ({ data, onChange, onNext, onBack }: Step3Props) => {
             </div>
 
             {/* Seleção de Canal */}
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6">
               {[
                 { type: CampaignChannelType.WHATSAPP, icon: MessageCircle, name: 'WhatsApp', color: 'from-green-500 to-emerald-500' },
                 { type: CampaignChannelType.EMAIL, icon: Mail, name: 'Email', color: 'from-blue-500 to-cyan-500' },

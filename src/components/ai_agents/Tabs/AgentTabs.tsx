@@ -364,7 +364,7 @@ const AgentTabs = ({
       <Tabs value={activeTab} onValueChange={onTabChange} className="w-full">
         <TabsList
           className={`grid w-full ${
-            tabs.length === 2 ? 'grid-cols-2' : tabs.length === 3 ? 'grid-cols-3' : 'grid-cols-4'
+            tabs.length === 2 ? 'grid-cols-2' : tabs.length === 3 ? 'grid-cols-3' : 'grid-cols-2 sm:grid-cols-4'
           } mb-8`}
         >
           {tabs.map(tab => {

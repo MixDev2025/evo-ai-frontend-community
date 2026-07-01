@@ -91,7 +91,7 @@ export default function ToolDetails({ open, onOpenChange, tool }: ToolDetailsPro
                 {t('details.modes.title')}
               </h3>
 
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-muted-foreground">
                     {t('details.modes.input')}

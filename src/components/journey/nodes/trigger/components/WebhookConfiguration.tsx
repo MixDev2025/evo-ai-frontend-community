@@ -114,7 +114,7 @@ export function WebhookConfiguration({
               type="url"
               value={webhookUrl || generatedUrl}
               placeholder={t('triggerComponents.webhook.urlPlaceholder')}
-              className="flex-1 bg-sidebar border-sidebar-border text-sidebar-foreground min-w-[400px]"
+              className="flex-1 bg-sidebar border-sidebar-border text-sidebar-foreground sm:min-w-[400px]"
               readOnly={true}
             />
             <Button

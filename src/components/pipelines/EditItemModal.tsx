@@ -263,7 +263,7 @@ export default function EditItemModal({
         </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4">
+          <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4">
             <TabsTrigger value="details">{t('editItem.tabs.details')}</TabsTrigger>
             <TabsTrigger value="services">{t('editItem.tabs.services')}</TabsTrigger>
             <TabsTrigger value="attributes">{t('editItem.tabs.attributes')}</TabsTrigger>

@@ -40,7 +40,7 @@ export default function ActionRow({
 
   return (
     <div className="flex items-start gap-2 p-3 border rounded-md">
-      <div className="flex-1 grid grid-cols-2 gap-2">
+      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2">
         <Controller
           control={control}
           name={`actions.${index}.action_name`}
@@ -351,7 +351,7 @@ function ActionParamsRenderer({ control, index, actionName, formData, t }: Param
                   placeholder={t('form.fields.actionRow.params.create_pipeline_task_description')}
                   rows={2}
                 />
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <Input
                     value={(current.task_type as string) ?? ''}
                     onChange={(e) => setField('task_type', e.target.value)}
@@ -363,7 +363,7 @@ function ActionParamsRenderer({ control, index, actionName, formData, t }: Param
                     placeholder={t('form.fields.actionRow.params.create_pipeline_task_priority')}
                   />
                 </div>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   <Input
                     type="number"
                     value={

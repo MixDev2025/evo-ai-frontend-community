@@ -354,7 +354,7 @@ export default function WidgetBuilderForm({ inboxId, inbox, onUpdate }: WidgetBu
                       onChange={e => handleConfigChange('widgetColor', e.target.value)}
                       className="w-full h-10"
                     />
-                    <div className="grid grid-cols-5 gap-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
                       {WIDGET_COLOR_PRESETS.map(color => (
                         <button
                           key={color}

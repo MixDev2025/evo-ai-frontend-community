@@ -173,7 +173,7 @@ const Step4_Settings = ({ data, availableTemplates = [], onChange, onNext, onBac
                       <RadioGroup
                         value={data.ab_test_winner_criteria || 'open_rate'}
                         onValueChange={(value) => onChange({ ab_test_winner_criteria: value as any })}
-                        className="grid grid-cols-2 gap-3"
+                        className="grid grid-cols-1 sm:grid-cols-2 gap-3"
                       >
                         <div className={`flex items-center space-x-3 p-4 border rounded-xl transition-all cursor-pointer ${data.ab_test_winner_criteria === 'open_rate' ? 'border-primary bg-primary/5' : 'border-border bg-background hover:border-primary/50'}`}>
                           <RadioGroupItem value="open_rate" id="open_rate" />
@@ -382,7 +382,7 @@ const Step4_Settings = ({ data, availableTemplates = [], onChange, onNext, onBac
 
                 {data.use_business_hours && (
                   <div className="space-y-4 animate-in fade-in duration-300 pl-11">
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div className="space-y-2">
                         <Label className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Início</Label>
                         <Input

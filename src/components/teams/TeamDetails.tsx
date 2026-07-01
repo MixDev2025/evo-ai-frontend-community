@@ -135,7 +135,7 @@ export default function TeamDetails({
               <Separator />
 
               {/* Quick Stats */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <p className="text-sm font-medium">{t('details.overview.totalMembers')}</p>
                   <p className="text-2xl font-bold text-blue-600">{team.members_count || 0}</p>
